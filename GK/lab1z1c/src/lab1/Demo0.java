@@ -1,4 +1,3 @@
-
 package lab1;
 /*
 * Computer graphics courses at Wroclaw University of Technology
@@ -23,8 +22,6 @@ public class Demo0 {
 
 		// Image resolution
 		int x_res, y_res;
-		// Ring center coordinates
-		int x_c, y_c;
 
 		// Loop variables - indices of the current row and column
 		int i, j;
@@ -36,21 +33,17 @@ public class Demo0 {
 		// szerokosc lini kraty
 		int size = Integer.parseInt(args[3].trim());
 
-		// odleglosc
-		int x = Integer.parseInt(args[4].trim());
-		int y = Integer.parseInt(args[5].trim());
-
-		// kolor lini
+		// kolor pola 1
 		int r_l, g_l, b_l;
-		r_l = Integer.parseInt(args[6].trim());
-		g_l = Integer.parseInt(args[7].trim());
-		b_l = Integer.parseInt(args[8].trim());
+		r_l = Integer.parseInt(args[4].trim());
+		g_l = Integer.parseInt(args[5].trim());
+		b_l = Integer.parseInt(args[6].trim());
 
-		// kolor tla
+		// kolor tla 2
 		int r_t, g_t, b_t;
-		r_t = Integer.parseInt(args[9].trim());
-		g_t = Integer.parseInt(args[10].trim());
-		b_t = Integer.parseInt(args[11].trim());
+		r_t = Integer.parseInt(args[7].trim());
+		g_t = Integer.parseInt(args[8].trim());
+		b_t = Integer.parseInt(args[9].trim());
 
 		int k_l = int2RGB(r_l, g_l, b_l);
 		int k_t = int2RGB(r_t, g_t, b_t);
@@ -61,19 +54,24 @@ public class Demo0 {
 		// with RGB packed in the integer data type
 		image = new BufferedImage(x_res, y_res, BufferedImage.TYPE_INT_RGB);
 
-
-
 		// Process the image, pixel by pixel
 		for (i = 0; i < y_res; i++)
 			for (j = 0; j < x_res; j++) {
-				image.setRGB(j, i, k_t);
-				if ((j+x_przes) % x <= size) {
-					image.setRGB(j, i, k_l);
+
+				if ((j / size) % 2 == 0) {
+					if ((i / size) % 2 == 1) {
+						image.setRGB(j, i, k_l);
+					} else {
+						image.setRGB(j, i, k_t);
+					}
+					
+				} else {
+					if ((i / size) % 2 == 0) {
+						image.setRGB(j, i, k_l);
+					} else {
+						image.setRGB(j, i, k_t);
+					}
 				}
-				if ((i+y_przes) % y <= size) {
-					image.setRGB(j, i, k_l);
-				}
-				
 
 			}
 
