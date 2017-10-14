@@ -44,6 +44,7 @@ public class Demo0 {
 		r_t = Integer.parseInt(args[7].trim());
 		g_t = Integer.parseInt(args[8].trim());
 		b_t = Integer.parseInt(args[9].trim());
+		
 
 		int k_l = int2RGB(r_l, g_l, b_l);
 		int k_t = int2RGB(r_t, g_t, b_t);
@@ -57,8 +58,8 @@ public class Demo0 {
 		// Process the image, pixel by pixel
 		for (i = 0; i < y_res; i++)
 			for (j = 0; j < x_res; j++) {
-				x=rotateX(j+size*100, i, 30);
-				y=rotateY(j+size*100, i, 30);
+				x=rotateX(j+size*100, i, 45);
+				y=rotateY(j+size*100, i, 45);
 
 				if (( x/ size) % 2 == 0) {
 					if ((y / size) % 2 == 1) {

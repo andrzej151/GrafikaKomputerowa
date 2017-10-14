@@ -44,11 +44,12 @@ public class Demo0 {
 		r_t = Integer.parseInt(args[7].trim());
 		g_t = Integer.parseInt(args[8].trim());
 		b_t = Integer.parseInt(args[9].trim());
+		
 
 		int k_l = int2RGB(r_l, g_l, b_l);
 		int k_t = int2RGB(r_t, g_t, b_t);
 
-		int x_przes = 20, y_przes = 40;
+		int x,y;
 
 		// Initialize an empty image, use pixel format
 		// with RGB packed in the integer data type
@@ -57,19 +58,22 @@ public class Demo0 {
 		// Process the image, pixel by pixel
 		for (i = 0; i < y_res; i++)
 			for (j = 0; j < x_res; j++) {
+				x=rotateX(j+size*100, i, 0);
+				y=rotateY(j+size*100, i, 0);
 
-				if ((j / size) % 2 == 0) {
-					if ((i / size) % 2 == 1) {
+				if (( x/ size) % 2 == 0) {
+					if ((y / size) % 2 == 1) {
 						image.setRGB(j, i, k_l);
 					} else {
 						image.setRGB(j, i, k_t);
 					}
 					
 				} else {
-					if ((i / size) % 2 == 0) {
-						image.setRGB(j, i, k_l);
-					} else {
+					if ((y / size) % 2 == 1) {
 						image.setRGB(j, i, k_t);
+					} else {
+						
+						image.setRGB(j, i, k_l);
 					}
 				}
 
@@ -95,4 +99,14 @@ public class Demo0 {
 		// Assemble packed RGB using bit shift operations
 		return (red << 16) + (green << 8) + blue;
 	}
+	
+	static int rotateX(int x, int y , int fi)
+	{
+		return (int) (x*Math.cos(fi*Math.PI/180) - y*Math.sin(fi*Math.PI/180));
+	}
+	static int rotateY(int x, int y , int fi)
+	{
+		return (int) (x*Math.sin(fi*Math.PI/180) + y*Math.cos(fi*Math.PI/180));
+	}
+	
 }
