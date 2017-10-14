@@ -25,27 +25,40 @@ public class Demo0 {
 		// Ring center coordinates
 		int x_c, y_c;
 
-		// Predefined black and white RGB representations
-		// packed as integers
-		int black, white;
-
 		// Loop variables - indices of the current row and column
 		int i, j;
-
-		// Fixed ring width
-		final int w = 10;
 
 		// Get required image resolution from command line arguments
 		x_res = Integer.parseInt(args[0].trim());
 		y_res = Integer.parseInt(args[1].trim());
 
+		// szerokosc lini kraty
+		int size = Integer.parseInt(args[3].trim());
+
+		// odleglosc
+		int x = Integer.parseInt(args[4].trim());
+		int y = Integer.parseInt(args[5].trim());
+
+		// kolor lini
+		int r_l, g_l, b_l;
+		r_l = Integer.parseInt(args[6].trim());
+		g_l = Integer.parseInt(args[7].trim());
+		b_l = Integer.parseInt(args[8].trim());
+
+		// kolor tla
+		int r_t, g_t, b_t;
+		r_t = Integer.parseInt(args[9].trim());
+		g_t = Integer.parseInt(args[10].trim());
+		b_t = Integer.parseInt(args[11].trim());
+
+		int k_l = int2RGB(r_l, g_l, b_l);
+		int k_t = int2RGB(r_t, g_t, b_t);
+
+		int x_przes = 10, y_przes = 10;
+
 		// Initialize an empty image, use pixel format
 		// with RGB packed in the integer data type
 		image = new BufferedImage(x_res, y_res, BufferedImage.TYPE_INT_RGB);
-
-		// Create packed RGB representation of black and white colors
-		black = int2RGB(0, 0, 0);
-		white = int2RGB(255, 255, 255);
 
 		// Find coordinates of the image center
 		x_c = x_res / 2;
@@ -54,23 +67,15 @@ public class Demo0 {
 		// Process the image, pixel by pixel
 		for (i = 0; i < y_res; i++)
 			for (j = 0; j < x_res; j++) {
-				double d;
-				int r;
+				image.setRGB(j, i, k_t);
+				if (j % x <= size) {
+					image.setRGB(j, i, k_l);
+				}
+				if (i % y <= size) {
+					image.setRGB(j, i, k_l);
+				}
+				
 
-				// Calculate distance to the image center
-				d = Math.sqrt((i - y_c) * (i - y_c) + (j - x_c) * (j - x_c));
-
-				// Find the ring index
-				r = (int) d / w;
-
-				// Make decision on the pixel color
-				// based on the ring index
-				if (r % 2 == 0)
-					// Even ring - set black color
-					image.setRGB(j, i, black);
-				else
-					// Odd ring - set white color
-					image.setRGB(j, i, white);
 			}
 
 		// Save the created image in a graphics file
