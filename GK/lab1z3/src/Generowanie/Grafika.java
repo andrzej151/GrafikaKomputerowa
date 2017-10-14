@@ -23,90 +23,186 @@ public class Grafika {
 	public void init() {
 		image = new BufferedImage(x_res, y_res, BufferedImage.TYPE_INT_RGB);
 	}
-	private void rings(int w)
-	{
-		int i, j, x_c, y_c,  black,white;
-		
+
+	private void ringsMax(int w, int maxr, int minr) {
+		int i, j, x_c, y_c, black, white;
+		System.out.println("s "+w);
 		// Create packed RGB representation of black and white colors
-				black = int2RGB(0, 0, 0);
-				white = int2RGB(255, 255, 255);
-				
+		black = int2RGB(0, 0, 0);
+		white = int2RGB(255, 255, 255);
+
 		// Find coordinates of the image center
-				x_c = x_res / 2;
-				y_c = y_res / 2;
+		x_c = x_res / 2;
+		y_c = y_res / 2;
 
-				// Process the image, pixel by pixel
-				for (i = 0; i < y_res; i++)
-					for (j = 0; j < x_res; j++) {
-						double d;
-						int r;
+		// Process the image, pixel by pixel
+		for (i = 0; i < y_res; i++)
+			for (j = 0; j < x_res; j++) {
+				double d;
+				int r;
 
-						// Calculate distance to the image center
-						d = Math.sqrt((i - y_c) * (i - y_c) + (j - x_c) * (j - x_c));
+				// Calculate distance to the image center
+				d = Math.sqrt((i - y_c) * (i - y_c) + (j - x_c) * (j - x_c));
 
-						// Find the ring index
-						r = (int) d / w;
+				// Find the ring index
+				r = (int) d / w;
 
-						// Make decision on the pixel color
-						// based on the ring index
-						if (r % 2 == 0)
-							// Even ring - set black color
-							image.setRGB(j, i, black);
-						else
-							// Odd ring - set white color
-							image.setRGB(j, i, white);
-					}
+				if (minr <= d && maxr >= d) {
+
+					// Make decision on the pixel color
+					// based on the ring index
+					if (r % 2 == 0)
+						// Even ring - set black color
+						image.setRGB(j, i, black);
+					else
+						// Odd ring - set white color
+						image.setRGB(j, i, white);
+				}
+			}
+	}
+
+	private void rings(int w) {
+		int i, j, x_c, y_c, black, white;
+
+		// Create packed RGB representation of black and white colors
+		black = int2RGB(0, 0, 0);
+		white = int2RGB(255, 255, 255);
+
+		// Find coordinates of the image center
+		x_c = x_res / 2;
+		y_c = y_res / 2;
+
+		// Process the image, pixel by pixel
+		for (i = 0; i < y_res; i++)
+			for (j = 0; j < x_res; j++) {
+				double d;
+				int r;
+
+				// Calculate distance to the image center
+				d = Math.sqrt((i - y_c) * (i - y_c) + (j - x_c) * (j - x_c));
+
+				// Find the ring index
+				r = (int) d / w;
+				
+				
+
+				// Make decision on the pixel color
+				// based on the ring index
+				if (r % 2 == 0)
+					// Even ring - set black color
+					image.setRGB(j, i, black);
+				else
+					// Odd ring - set white color
+					image.setRGB(j, i, white);
+			}
 	}
 	
-	private void rings(int w, int x_s, int y_s,int width, int height)
-	{
-		int i, j, x_c, y_c,  black,white;
-		
+	private void promien(int ilosc) {
+		int i, j, x_c, y_c, black, white;
+
 		// Create packed RGB representation of black and white colors
-				black = int2RGB(0, 0, 0);
-				white = int2RGB(255, 255, 255);
-				
+		black = int2RGB(0, 0, 0);
+		white = int2RGB(255, 255, 255);
+
 		// Find coordinates of the image center
-				x_c = x_s + width / 2;
-				y_c = y_s + height / 2;
+		x_c = x_res / 2;
+		y_c = y_res / 2;
+		int x, y;
+		int a=0;
 
-				// Process the image, pixel by pixel
-				for (i = y_s; i < y_s+height; i++)
-					for (j = x_s; j < x_s+width; j++) {
-						double d;
-						int r;
+		// Process the image, pixel by pixel
+		for (i = 0; i < y_res; i++)
+			for (j = 0; j < x_res; j++) {
+				double d;
+			
 
-						// Calculate distance to the image center
-						d = Math.sqrt((i - y_c) * (i - y_c) + (j - x_c) * (j - x_c));
+				// Calculate distance to the image center
+				d = Math.sqrt((i - y_c) * (i - y_c) + (j - x_c) * (j - x_c));
 
-						// Find the ring index
-						r = (int) d / w;
+				// Find the ring index
+				a = (int) (Math.asin(Math.abs(j-x_c)/d)*180/Math.PI-1);
 
-						// Make decision on the pixel color
-						// based on the ring index
-						if (r % 2 == 0)
-							// Even ring - set black color
-							image.setRGB(j, i, black);
-						else
-							// Odd ring - set white color
-							image.setRGB(j, i, white);
-					}
+				// Make decision on the pixel color
+				// based on the ring index
+				if ((a/15) % 2 == 0) {
+					// Even ring - set black color
+					image.setRGB(j,i,  black);
+				}
+				else
+				{
+					// Odd ring - set white color
+					image.setRGB(j,i,  white);
+				}
+			}
 	}
-	
+
+
+	private void ringMax() {
+		
+		
+		int w = 15;
+		int d = (int) Math.sqrt(x_res*x_res+y_res*y_res)/2;
+		int b = d/w;
+		
+		
+		for (int i = 0; i < w; i++) {
+			ringsMax((i+1)*2, (i+1)*b, i*b);
+			 b = d/w;
+		}
+			
+		
+			
+		
+		
+	}
+
+	private void rings(int w, int x_s, int y_s, int width, int height) {
+		int i, j, x_c, y_c, black, white;
+
+		// Create packed RGB representation of black and white colors
+		black = int2RGB(0, 0, 0);
+		white = int2RGB(255, 255, 255);
+
+		// Find coordinates of the image center
+		x_c = x_s + width / 2;
+		y_c = y_s + height / 2;
+
+		// Process the image, pixel by pixel
+		for (i = y_s; i < y_s + height; i++)
+			for (j = x_s; j < x_s + width; j++) {
+				double d;
+				int r;
+
+				// Calculate distance to the image center
+				d = Math.sqrt((i - y_c) * (i - y_c) + (j - x_c) * (j - x_c));
+
+				// Find the ring index
+				r = (int) d / w;
+
+				// Make decision on the pixel color
+				// based on the ring index
+				if (r % 2 == 0)
+					// Even ring - set black color
+					image.setRGB(j, i, black);
+				else
+					// Odd ring - set white color
+					image.setRGB(j, i, white);
+			}
+	}
+
 	private void ringsRepate(int w, int width, int height) {
 		int i, j;
-		
-		for (i = 0; i < y_res/height; i++) {
-			for (j = 0; j < x_res/width; j++) {
-				System.out.println(i+" "+j+" "+j*width+" "+ i*height);
-				rings(w, j*width, i*height, width, height);
+
+		for (i = 0; i < y_res / height; i++) {
+			for (j = 0; j < x_res / width; j++) {
+				System.out.println(i + " " + j + " " + j * width + " " + i * height);
+				rings(w, j * width, i * height, width, height);
 			}
 		}
-		
-	}
-	
 
- 	private void szachownica(int size, int ank, int r_p1, int g_p1, int b_p1, int r_p2, int g_p2, int b_p2) {
+	}
+
+	private void szachownica(int size, int ank, int r_p1, int g_p1, int b_p1, int r_p2, int g_p2, int b_p2) {
 
 		// Loop variables - indices of the current row and column
 		int i, j, x, y;
@@ -168,6 +264,10 @@ public class Grafika {
 	private int rotateY(int x, int y, int fi) {
 		return (int) (x * Math.sin(fi * Math.PI / 180) + y * Math.cos(fi * Math.PI / 180));
 	}
+	
+	private int fi(int x,int y) {
+		return (int)(((Math.acos(y/x)-1)*(2/Math.PI)/(180/Math.PI)));
+	}
 
 	public void procedura_szachownica(int size, int ank, int r_p1, int g_p1, int b_p1, int r_p2, int g_p2, int b_p2) {
 		init();
@@ -175,14 +275,21 @@ public class Grafika {
 		save(name);
 
 	}
-	
+
 	public void procedura_rings(int w) {
 		init();
 		rings(w);
 		save(name);
 
 	}
-	
+
+	public void procedura_rings_max() {
+		init();
+		ringMax();
+		save(name);
+
+	}
+
 	public void procedura_ringsRepate(int w, int width, int height) {
 		init();
 		ringsRepate(w, width, height);
@@ -191,7 +298,14 @@ public class Grafika {
 	}
 
 	public void zmien_nazwe_docelowego(String name) {
-		this.name=name;
+		this.name = name;
+
+	}
+
+	public void procedura_promien(int ilosc) {
+		init();
+		promien(ilosc);
+		save(name);
 		
 	}
 
