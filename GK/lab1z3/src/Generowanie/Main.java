@@ -14,7 +14,12 @@ public class Main {
 		g.procedura_rings_max();
 		g.zmien_nazwe_docelowego("plik4.bmp");
 		g.procedura_promien(15);
-		
+		g.zmien_nazwe_docelowego("plik5.bmp");
+		g.procedura_pierscienie_rozmyte(10, 10);
+		g.zmien_nazwe_docelowego("plik6.bmp");
+		g.procedura_krata(5, 50, 100, 20, 20, 255, 255,255, 0,0,0);
+		g.procedura_przepisz("lisc.bmp", "liscie.bmp");
+		g.procedura_dorysuj_krate("lisc.bmp", "liscieZakrata.bmp",5,50,50,20,40,255,0,0);
 	
 	}
 
