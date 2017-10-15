@@ -96,18 +96,18 @@ public class Grafika {
 	}
 
 	private void polacz() {
-		int i, j,r,g,b;
-		Color m, o1, o2,d;
-		
+		int i, j, r, g, b;
+		Color m, o1, o2, d;
+
 		for (i = 0; i < y_res; i++)
 			for (j = 0; j < x_res; j++) {
 				m = new Color(maska.getRGB(j, i));
 				o1 = new Color(obraz1.getRGB(j, i));
 				o2 = new Color(obraz2.getRGB(j, i));
-				r=(m.getRed()/255)*o1.getRed()+((255-m.getRed())/255)*o2.getRed();
-				g=(m.getGreen()/255)*o1.getGreen()+((255-m.getGreen())/255)*o2.getGreen();
-				b=(m.getBlue()/255)*o1.getBlue()+((255-m.getBlue())/255)*o2.getBlue();
-				d = new Color(r,g,b);
+				r = (m.getRed() / 255) * o1.getRed() + ((255 - m.getRed()) / 255) * o2.getRed();
+				g = (m.getGreen() / 255) * o1.getGreen() + ((255 - m.getGreen()) / 255) * o2.getGreen();
+				b = (m.getBlue() / 255) * o1.getBlue() + ((255 - m.getBlue()) / 255) * o2.getBlue();
+				d = new Color(r, g, b);
 				dest.setRGB(j, i, d.getRGB());
 
 			}
@@ -325,14 +325,59 @@ public class Grafika {
 					maska.setRGB(j, i, white);
 			}
 	}
+	
+	private void kolo(int r, int x_s, int y_s, int width, int height) {
+		int i, j, x_c, y_c, black, white;
+
+		// Create packed RGB representation of black and white colors
+		black = int2RGB(0, 0, 0);
+		white = int2RGB(255, 255, 255);
+
+		// Find coordinates of the image center
+		x_c = x_s + width / 2;
+		y_c = y_s + height / 2;
+
+		// Process the image, pixel by pixel
+		for (i = y_s; i < y_s + height; i++)
+			for (j = x_s; j < x_s + width; j++) {
+				double d;
+				
+
+				// Calculate distance to the image center
+				d = Math.sqrt((i - y_c) * (i - y_c) + (j - x_c) * (j - x_c));
+
+			
+
+				// Make decision on the pixel color
+				// based on the ring index
+				if (d < r)
+					// Even ring - set black color
+					maska.setRGB(j, i, black);
+				else
+					// Odd ring - set white color
+					maska.setRGB(j, i, white);
+			}
+	}
 
 	private void ringsRepate(int w, int width, int height) {
 		int i, j;
 
 		for (i = 0; i < y_res / height; i++) {
 			for (j = 0; j < x_res / width; j++) {
-				System.out.println(i + " " + j + " " + j * width + " " + i * height);
+				//System.out.println(i + " " + j + " " + j * width + " " + i * height);
 				rings(w, j * width, i * height, width, height);
+			}
+		}
+
+	}
+	
+	private void kolaRepate(int r, int width, int height) {
+		int i, j;
+
+		for (i = 0; i < y_res / height; i++) {
+			for (j = 0; j < x_res / width; j++) {
+				//System.out.println(i + " " + j + " " + j * width + " " + i * height);
+				kolo(r, j * width, i * height, width, height);
 			}
 		}
 
@@ -465,6 +510,12 @@ public class Grafika {
 		save(name);
 
 	}
+	public void procedura_kolo_Repate(int r, int width, int height) {
+		init();
+		kolaRepate(r, width, height);
+		save(name);
+
+	}
 
 	public void zmien_nazwe_docelowego(String name) {
 		this.name = name;
@@ -500,18 +551,28 @@ public class Grafika {
 		polacz();
 		saveDest(destanacion);
 	}
-	
-	public void procedura_promien_polacz(int ilosc,String o1, String o2, String destanacion) {
+
+	public void procedura_promien_polacz(int ilosc, String o1, String o2, String destanacion) {
 		wczytaj(o1, o2);
 		promien(ilosc);
 		polacz();
 		saveDest(destanacion);
 
 	}
-	
-	public void procedura_pierscienie_rozmyte_polacz(int szybkosc,int wielkosc, String o1, String o2, String destanacion) {
+
+	public void procedura_pierscienie_rozmyte_polacz(int szybkosc, int wielkosc, String o1, String o2,
+			String destanacion) {
 		wczytaj(o1, o2);
 		pierscienierozmyte(szybkosc, wielkosc);
+		polacz();
+		saveDest(destanacion);
+
+	}
+	
+	public void procedura_kolo_repate_polacz(int r, int width, int height, String o1, String o2,
+			String destanacion) {
+		wczytaj(o1, o2);
+		kolaRepate(r, width, height);
 		polacz();
 		saveDest(destanacion);
 
