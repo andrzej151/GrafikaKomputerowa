@@ -94,9 +94,15 @@ public class Grafika {
 			}
 
 	}
+	
+	private double obliczA(int mask) {
+		//System.out.println(mask/255.0);
+		return mask/255.0;
+	}
 
 	private void polacz() {
-		int i, j, r, g, b;
+		int i, j;
+		double r, g, b;
 		Color m, o1, o2, d;
 
 		for (i = 0; i < y_res; i++)
@@ -104,10 +110,10 @@ public class Grafika {
 				m = new Color(maska.getRGB(j, i));
 				o1 = new Color(obraz1.getRGB(j, i));
 				o2 = new Color(obraz2.getRGB(j, i));
-				r = (m.getRed() / 255) * o1.getRed() + ((255 - m.getRed()) / 255) * o2.getRed();
-				g = (m.getGreen() / 255) * o1.getGreen() + ((255 - m.getGreen()) / 255) * o2.getGreen();
-				b = (m.getBlue() / 255) * o1.getBlue() + ((255 - m.getBlue()) / 255) * o2.getBlue();
-				d = new Color(r, g, b);
+				r = (obliczA(m.getRed()) ) * o1.getRed() + (1-obliczA(m.getRed()) ) * o2.getRed();
+				g = (obliczA(m.getGreen()) ) * o1.getGreen() + (1-obliczA(m.getGreen()) ) * o2.getGreen();
+				b = (obliczA(m.getBlue() )) * o1.getBlue() + (1-obliczA(m.getBlue()) ) * o2.getBlue();
+				d = new Color((int) r, (int) g, (int)b);
 				dest.setRGB(j, i, d.getRGB());
 
 			}
