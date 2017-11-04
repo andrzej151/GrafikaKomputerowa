@@ -8,7 +8,7 @@ import javax.swing.JTable;
 
 
 
-public class MyWindow extends JFrame{
+public class MyWindow extends JFrame {
 
 	 public MyWindow()
 	    {   	
