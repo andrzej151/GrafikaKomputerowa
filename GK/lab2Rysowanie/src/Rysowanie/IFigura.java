@@ -5,6 +5,6 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 public interface IFigura  {
-	public void paint( Graphics2D  g2d);
+	public void paint( Graphics2D  g2d, Menu menu);
 	
 }

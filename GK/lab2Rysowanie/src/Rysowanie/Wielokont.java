@@ -14,19 +14,33 @@ public class Wielokont implements IFigura {
 	}
 
 	@Override
-	public void paint(Graphics2D g2d) {
+	public void paint(Graphics2D g2d, Menu menu) {
 		// TODO Auto-generated method stub
-		g2d.drawLine(points.get(0).x, points.get(0).y, points.get(points.size() - 1).x,
-				points.get(points.size() - 1).y);
-		for (int i = 0; i < (points.size() - 1); i++) {
+		
+		for (int i = 0; i < (points.size()- 1 ); i++) {
 			g2d.drawLine(points.get(i).x, points.get(i).y, points.get(i + 1).x, points.get(i + 1).y);
 
 		}
+		
 
 	}
 
 	public void addPoint(Point p) {
 		points.add(p);
+	}
+
+	public Point getPoint(int index) {
+
+		return points.get(index);
+	}
+
+	public Point getlastPoint() {
+		return points.get(points.size() - 1);
+	}
+
+	public void addfirstPoint() {
+		// TODO Auto-generated method stub
+		points.add(points.get(0));
 	}
 
 }
