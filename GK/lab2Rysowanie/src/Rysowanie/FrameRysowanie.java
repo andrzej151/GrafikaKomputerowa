@@ -15,14 +15,19 @@ public class FrameRysowanie extends JFrame {
 	private Menu menu;
 
 	private ArrayList<IFigura> wielokonty = new ArrayList<IFigura>();
+	private ArrayList<IFigura> prostokonty = new ArrayList<IFigura>();
+	private ArrayList<IFigura> elipsy = new ArrayList<IFigura>();
 
 	public FrameRysowanie() {
 		super("Rysowanie - lab 2 GK");
 		wielokonty = new ArrayList<IFigura>();
 		
 
-		kanwa = new Canva(50, 150, 250, 250);
+		kanwa = new Canva();
+		kanwa.setBounds(50, 150, 250, 250);
 		kanwa.setWielokonty(wielokonty);
+		kanwa.setProstokonty(prostokonty);
+		kanwa.setElipsy(elipsy);
 		add(kanwa);
 
 		menu = new Menu();

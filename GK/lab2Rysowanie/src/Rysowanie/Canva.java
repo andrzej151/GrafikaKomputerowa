@@ -12,27 +12,41 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class Canva extends JPanel implements MouseListener, MouseMotionListener {
 	private ArrayList<IFigura> wielokonty = new ArrayList<IFigura>();
+	private ArrayList<IFigura> prostokonty = new ArrayList<IFigura>();
+	private ArrayList<IFigura> elipsy = new ArrayList<IFigura>();
 	private Menu menu;
-	private int wielokont;
+	private int wielokont, prostokant, elipsa;
 	private int startx, starty, with, height;
 	private Line2D.Double line;
+	private BufferedImage obrazek;
 
-	public Canva(int startx, int starty, int with, int height) {
+	public Canva() {
 		// TODO Auto-generated constructor stub
+		wielokont = -1;
+		prostokant = -1;
+		elipsa = -1;
+		addMouseListener(this);
+		addMouseMotionListener(this);
+	}
+
+	public void setBounds(int startx, int starty, int with, int height) {
 		this.startx = startx;
 		this.starty = starty;
 		this.with = with;
 		this.height = height;
-		setBounds(startx, starty, with, height);
-		wielokont = -1;
-		addMouseListener(this);
-		addMouseMotionListener(this);
+	
+		super.setBounds(startx, starty, with, height);
+
 	}
 
 	public void setWielokonty(ArrayList<IFigura> wielokonty) {
@@ -41,16 +55,27 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 	}
 
 	public void paintComponent(Graphics g) {
-		g.setColor(Color.white);
 		super.paintComponent(g);
 
 		Graphics2D g2d = (Graphics2D) g;
 
+		if (menu.getTryb().equals(Tryb.WCZYTYWANIE)) {
+			setBounds(startx, starty, menu.getwidh(), menu.getheight());
+			wczytaj();
+		}
+
+		Rectangle2D.Double rect = new Rectangle2D.Double(0, 0, with - 1, height - 1);
+		if (obrazek == null) {
+			rect = new Rectangle2D.Double(0, 0, with - 1, height - 1);
+			g2d.setColor(Color.white);
+			g2d.fill(rect);
+		} else {
+			g2d.drawImage(obrazek, 0, 0, with, height, null);
+		}
+
 		// Fill rectangular area to show how XOR drawing renders
 		// lines on various background
-		Rectangle2D.Double rect = new Rectangle2D.Double(0, 0, with - 1, height - 1);
-		g2d.setColor(Color.white);
-		g2d.fill(rect);
+
 		g2d.setColor(Color.black);
 		g2d.draw(rect);
 
@@ -58,6 +83,14 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 		g2d.setXORMode(Color.white);
 
 		for (IFigura f : wielokonty) {
+
+			f.paint(g2d, menu);
+		}
+		for (IFigura f : prostokonty) {
+
+			f.paint(g2d, menu);
+		}
+		for (IFigura f : elipsy) {
 
 			f.paint(g2d, menu);
 		}
@@ -85,13 +118,20 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 	@Override
 	public void mouseMoved(MouseEvent event) {
 		// TODO Auto-generated method stub
-		System.out.println("OK");
+		
 		if (menu.getTryb().equals(Tryb.WIELOKONTPAINT)) {
 
 			line = new Line2D.Double(((Wielokont) wielokonty.get(wielokont)).getlastPoint(),
 					new Point(event.getX(), event.getY()));
-			repaint();
+
+		} else if (menu.getTryb().equals(Tryb.PROSTOKONTPAINT)) {
+			((Prostokat) prostokonty.get(prostokant)).addend(event.getX(), event.getY());
+		} else if (menu.getTryb().equals(Tryb.ELIPSAPAINT)) {
+			((Elipsa) elipsy.get(elipsa)).addend(event.getX(), event.getY());
 		}
+		
+
+		repaint();
 
 	}
 
@@ -102,18 +142,29 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
+	public void mouseEntered(MouseEvent event) {
 		// TODO Auto-generated method stub
+		if (menu.getTryb().equals(Tryb.PROSTOKONTPAINT)) {
+			((Prostokat) prostokonty.get(prostokant)).addend(event.getX(), event.getY());
+		}else if (menu.getTryb().equals(Tryb.ELIPSAPAINT)) {
+			((Elipsa) elipsy.get(elipsa)).addend(event.getX(), event.getY());
 
+		}
 	}
 
 	@Override
-	public void mouseExited(MouseEvent arg0) {
+	public void mouseExited(MouseEvent event) {
 		// TODO Auto-generated method stub
 		if (menu.getTryb().equals(Tryb.WIELOKONTPAINT)) {
 			((Wielokont) (wielokonty.get(wielokont))).addfirstPoint();
 			menu.setTryb(Tryb.OFF);
 			line = null;
+		} else if (menu.getTryb().equals(Tryb.PROSTOKONTPAINT)) {
+			((Prostokat) prostokonty.get(prostokant)).addend(event.getX(), event.getY());
+
+		}if (menu.getTryb().equals(Tryb.ELIPSAPAINT)) {
+			((Elipsa) elipsy.get(elipsa)).addend(event.getX(), event.getY());
+
 		}
 
 		repaint();
@@ -121,7 +172,7 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 	}
 
 	@Override
-	public void mousePressed(MouseEvent arg0) {
+	public void mousePressed(MouseEvent event) {
 		// TODO Auto-generated method stub
 
 	}
@@ -140,9 +191,55 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 		} else if (menu.getTryb().equals(Tryb.WIELOKONTPAINT)) {
 			((Wielokont) wielokonty.get(wielokont)).addPoint(new Point(event.getX(), event.getY()));
 
+		} else if (menu.getTryb().equals(Tryb.PROSTOKONT)) {
+			menu.setTryb(Tryb.PROSTOKONTPAINT);
+			prostokant = prostokonty.size();
+			Prostokat p = new Prostokat();
+			p.addstart(event.getX(), event.getY());
+			p.addend(event.getX(), event.getY());
+			prostokonty.add(p);
+
+		} else if (menu.getTryb().equals(Tryb.PROSTOKONTPAINT)) {
+			menu.setTryb(Tryb.OFF);
+			((Prostokat) prostokonty.get(prostokant)).addend(event.getX(), event.getY());
+
+		}else if (menu.getTryb().equals(Tryb.ELIPSA)) {
+			menu.setTryb(Tryb.ELIPSAPAINT);
+			elipsa = elipsy.size();
+			Elipsa p = new Elipsa();
+			p.addstart(event.getX(), event.getY());
+			p.addend(event.getX(), event.getY());
+			elipsy.add(p);
+
+		} else if (menu.getTryb().equals(Tryb.ELIPSAPAINT)) {
+			menu.setTryb(Tryb.OFF);
+			((Elipsa) elipsy.get(elipsa)).addend(event.getX(), event.getY());
+
 		}
 
 		repaint();
+	}
+
+	public void wczytaj() {
+
+		try {
+			String image_name = menu.getfileName();
+			obrazek = ImageIO.read(new File(image_name));
+			menu.setTryb(Tryb.OFF);
+		} catch (IOException e) {
+			menu.setTryb(Tryb.ERROR);
+
+		}
+	}
+
+	public void setProstokonty(ArrayList<IFigura> prostokonty) {
+		// TODO Auto-generated method stub
+		this.prostokonty = prostokonty;
+	}
+
+	public void setElipsy(ArrayList<IFigura> elipsy) {
+		// TODO Auto-generated method stub
+		this.elipsy = elipsy;
 	}
 
 }

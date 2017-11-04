@@ -21,7 +21,7 @@ public class Menu extends JComponent implements ActionListener {
 	private JButton belipsa;
 	private JButton bwielokont;
 	private JButton btabela;
-	private JTextField textField;
+	private JTextField textField, textx, texty;
 	private Tryb tryb;
 	private int width = 80, height = 40;
 
@@ -30,8 +30,8 @@ public class Menu extends JComponent implements ActionListener {
 
 		// Switch off automatic components positioning
 		// Wy³¹czanie automatycznego pozycjonowania komponentów
-		setLayout(null)
-		;
+		setLayout(null);
+		
 
 		// Create components and add it to the panel
 		// Utworzenie komponentów i dodanie ich do panelu okna
@@ -42,6 +42,8 @@ public class Menu extends JComponent implements ActionListener {
 		bwielokont = new JButton("WIELOKONT");
 		btabela = new JButton("TABELA");
 		textField = new JTextField();
+		textx = new JTextField("500");
+		texty = new JTextField("500");
 
 		bwczytajObrazek.setBounds(50, 50, width, height);
 		bzapiszObrazek.setBounds(150, 50, width, height);
@@ -50,6 +52,8 @@ public class Menu extends JComponent implements ActionListener {
 		bwielokont.setBounds(250, 100, width, height);
 		btabela.setBounds(250, 50, width, height);
 		textField.setBounds(350, 100, width*2, height);
+		textx.setBounds(400, 50, width/2, height);
+		texty.setBounds(450, 50, width/2, height);
 
 		add(bwczytajObrazek);
 		add(bzapiszObrazek);
@@ -58,6 +62,8 @@ public class Menu extends JComponent implements ActionListener {
 		add(bwielokont);
 		add(btabela);
 		add(textField);
+		add(textx);
+		add(texty);
 
 		tryb = Tryb.OFF;
 
@@ -70,7 +76,7 @@ public class Menu extends JComponent implements ActionListener {
 		belipsa.addActionListener(this);
 		bwielokont.addActionListener(this);
 		btabela.addActionListener(this);
-		textField.addActionListener(this);
+		
 
 	}
 
@@ -123,6 +129,21 @@ public class Menu extends JComponent implements ActionListener {
 		// Force window redraw to see the result immediately
 		// Wymuszenie przerysowania okna aby uzyskaæ efekt operacji natychmiast
 		repaint();
+	}
+
+	public String getfileName() {
+		// TODO Auto-generated method stub
+		return textField.getText();
+	}
+
+	public int getwidh() {
+		// TODO Auto-generated method stub
+		return Integer.parseInt(textx.getText());
+	}
+
+	public int getheight() {
+		// TODO Auto-generated method stub
+		return Integer.parseInt(texty.getText());
 	}
 
 }
