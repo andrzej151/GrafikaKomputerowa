@@ -1,5 +1,8 @@
 package Rysowanie;
 
-public interface IMaska {
+import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageFilter;
 
+public interface IMaska {
+	BufferedImage generuj(int x_res, int y_res);
 }

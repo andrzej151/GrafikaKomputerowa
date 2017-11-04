@@ -22,4 +22,13 @@ public class Prostokat implements IFigura{
 		this.h=y-this.y;
 	}
 
+
+
+	@Override
+	public void paint(Graphics2D g2d, double scala) {
+		// TODO Auto-generated method stub
+		int s=(int)scala;
+		g2d.fillRect(x*s, y*s, w*s, h*s);
+	}
+
 }

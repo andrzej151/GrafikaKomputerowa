@@ -22,4 +22,12 @@ public class Elipsa  implements IFigura{
 		this.h=y-this.y;
 	}
 
+
+
+	@Override
+	public void paint(Graphics2D g2d, double scala) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
