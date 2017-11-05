@@ -12,7 +12,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Frys();
+                new FrameRysowanie();
             }
         });;
 

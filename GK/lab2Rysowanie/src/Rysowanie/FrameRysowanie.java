@@ -1,5 +1,6 @@
 package Rysowanie;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -13,7 +14,8 @@ public class FrameRysowanie extends JFrame {
 
 	private Canva kanwa;
 	private Menu menu;
-	private Tabele tabele;
+	private Listy listy;
+	
 
 	private ArrayList<IFigura> wielokonty = new ArrayList<IFigura>();
 	private ArrayList<IFigura> prostokonty = new ArrayList<IFigura>();
@@ -30,17 +32,20 @@ public class FrameRysowanie extends JFrame {
 		kanwa.setProstokonty(prostokonty);
 		kanwa.setElipsy(elipsy);
 		add(kanwa);
+		
+		listy = new Listy();
+		listy.setBounds(600, 50, 300, 900);
+		listy.setBackground(new Color(255, 0, 0));
+		listy.setWielokonty(wielokonty);
+		listy.setProstokonty(prostokonty);
+		listy.setElipsy(elipsy);
+		add(listy);
 
 		menu = new Menu();
 		kanwa.setMenu(menu);
 		add(menu);
 		
-		tabele=new Tabele();
-		tabele.setBounds(400, 50, 400, 800);
-		tabele.setWielokonty(wielokonty);
-		tabele.setProstokonty(prostokonty);
-		tabele.setElipsy(elipsy);
-		add(tabele);
+		
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(50, 50, 1050, 1050);

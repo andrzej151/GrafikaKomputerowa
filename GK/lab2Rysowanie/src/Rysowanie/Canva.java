@@ -28,7 +28,7 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 	private int wielokont, prostokant, elipsa;
 	private int startx, starty, with, height;
 	private Line2D.Double line;
-	private BufferedImage obrazek1,dest;
+	private BufferedImage obrazek1, dest;
 	private Generator generator;
 	private MaskaWektor mwektor;
 	private Maskaszachownica mszach;
@@ -56,6 +56,7 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 
 		this.wielokonty = wielokonty;
 	}
+
 	public void setProstokonty(ArrayList<IFigura> prostokonty) {
 		// TODO Auto-generated method stub
 		this.prostokonty = prostokonty;
@@ -76,7 +77,7 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 			wczytaj();
 		}
 		if (menu.getTryb().equals(Tryb.ZAPIS)) {
-			
+
 			zapis();
 		}
 
@@ -118,8 +119,6 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 		}
 
 	}
-
-	
 
 	public void setMenu(Menu menu) {
 		// TODO Auto-generated method stub
@@ -249,6 +248,7 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 
 		}
 	}
+
 	private void zapis() {
 		try {
 			String name = menu.getfileName();
@@ -262,8 +262,8 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 			generator.setMaska(mwektor);
 			generator.generuj();
 			generator.polaczSZ();
-		
-			dest=generator.getDest();
+
+			dest = generator.getDest();
 			ImageIO.write(dest, "bmp", new File(name));
 			System.out.println(" image created successfully");
 			menu.setTryb(Tryb.OFF);
@@ -271,7 +271,5 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 			System.out.println("The image cannot be stored");
 		}
 	}
-
-	
 
 }

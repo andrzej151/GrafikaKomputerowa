@@ -72,7 +72,7 @@ public class Generator {
 
 				}
 		}
-		
+
 		x_res = sourse1.getWidth() > sourse2.getWidth() ? sourse2.getWidth() : sourse1.getWidth();
 		y_res = sourse1.getHeight() > sourse2.getHeight() ? sourse2.getHeight() : sourse1.getHeight();
 		dest = new BufferedImage(x_res, y_res, BufferedImage.TYPE_INT_RGB);
@@ -125,7 +125,7 @@ public class Generator {
 				d = new Color((int) r, (int) g, (int) b);
 				dest.setRGB(j, i, d.getRGB());
 			}
-			}
+		}
 
 	}
 

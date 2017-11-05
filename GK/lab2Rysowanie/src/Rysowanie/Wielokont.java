@@ -54,5 +54,15 @@ public class Wielokont implements IFigura {
 		}
 		g2d.fillPolygon(tbx, tby, tbx.length);
 	}
+	
+	public String toString() {
+		String s="wielokont ";
+		for(Point p :points)
+		{
+			s+="("+p.x+","+p.y+")";
+		}
+		return s ;
+		
+	}
 
 }

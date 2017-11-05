@@ -18,8 +18,24 @@ public class Prostokat implements IFigura{
 		this.y=y;
 	}
 	public void addend(int x, int y) {
-		this.w=x-this.x;
-		this.h=y-this.y;
+		
+		if((x-this.x)>0)
+		{
+			this.w=x-this.x;
+		}else
+		{
+			this.w=Math.abs(this.x-x);
+			this.x=x;
+		}
+		
+		if((y-this.y)>0)
+		{
+			this.h=y-this.y;
+		}else
+		{
+			this.h=Math.abs(this.y-y);
+			this.y=y;
+		}
 		
 	}
 
