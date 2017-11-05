@@ -39,6 +39,7 @@ public class FrameRysowanie extends JFrame {
 		listy.setWielokonty(wielokonty);
 		listy.setProstokonty(prostokonty);
 		listy.setElipsy(elipsy);
+		listy.setMenu(menu);
 		add(listy);
 
 		menu = new Menu();

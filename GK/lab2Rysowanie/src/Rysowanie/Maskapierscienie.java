@@ -2,7 +2,7 @@ package Rysowanie;
 
 import java.awt.image.BufferedImage;
 
-public class Maskaszachownica implements IMaska {
+public class Maskapierscienie implements IMaska {
 	
 	private BufferedImage maska;
 

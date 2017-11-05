@@ -31,7 +31,7 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 	private BufferedImage obrazek1, dest;
 	private Generator generator;
 	private MaskaWektor mwektor;
-	private Maskaszachownica mszach;
+	private Maskapierscienie mszach;
 
 	public Canva() {
 		// TODO Auto-generated constructor stub
