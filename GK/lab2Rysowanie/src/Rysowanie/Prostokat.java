@@ -20,6 +20,7 @@ public class Prostokat implements IFigura{
 	public void addend(int x, int y) {
 		this.w=x-this.x;
 		this.h=y-this.y;
+		
 	}
 
 
@@ -29,6 +30,11 @@ public class Prostokat implements IFigura{
 		// TODO Auto-generated method stub
 		int s=(int)scala;
 		g2d.fillRect(x*s, y*s, w*s, h*s);
+	}
+	
+	public String toString() {
+		return "prostokont: "+x+" "+y+" "+w+" "+h ;
+		
 	}
 
 }

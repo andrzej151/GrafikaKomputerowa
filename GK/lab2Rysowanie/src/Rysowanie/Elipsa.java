@@ -27,7 +27,8 @@ public class Elipsa  implements IFigura{
 	@Override
 	public void paint(Graphics2D g2d, double scala) {
 		// TODO Auto-generated method stub
-		
+		int s = (int)scala;
+		g2d.fillOval(x*s, y*s, w*s, h*s);
 	}
 
 }
