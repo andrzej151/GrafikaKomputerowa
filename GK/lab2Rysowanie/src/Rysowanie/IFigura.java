@@ -2,6 +2,7 @@ package Rysowanie;
 
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public interface IFigura {

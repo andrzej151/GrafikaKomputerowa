@@ -2,9 +2,10 @@ package Rysowanie;
 
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Wielokont implements IFigura {
+public class Wielokont implements IFigura, Serializable {
 
 	private ArrayList<Point> points = new ArrayList<Point>();
 	private int pointzmiany;
@@ -57,10 +58,10 @@ public class Wielokont implements IFigura {
 	}
 	
 	public String toString() {
-		String s="wielokont ";
+		String s="wx ";
 		for(Point p :points)
 		{
-			s+="("+p.x+","+p.y+")";
+			s+="x"+p.x+"x"+p.y+"x";
 		}
 		return s ;
 		

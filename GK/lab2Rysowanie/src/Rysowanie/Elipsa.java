@@ -1,10 +1,27 @@
 package Rysowanie;
 
 import java.awt.Graphics2D;
+import java.io.Serializable;
 
-public class Elipsa implements IFigura {
+
+public class Elipsa implements IFigura, Serializable {
 
 	private int x, y, w, h;
+	
+	 public Elipsa() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	 public Elipsa(String string, String string2, String string3, String string4) {
+		// TODO Auto-generated constructor stub
+		Integer i = null;
+		x = i.parseInt(string);
+		y = i.parseInt(string2);
+		w = i.parseInt(string3);
+		h = i.parseInt(string4);
+		System.out.println(this);
+
+	}
 
 	@Override
 	public void paint(Graphics2D g2d, Menu menu) {
@@ -41,7 +58,7 @@ public class Elipsa implements IFigura {
 	}
 	
 	public String toString() {
-		return "elipsa: "+x+" "+y+" "+w+" "+h ;
+		return "ex"+x+"x"+y+"x"+w+"x"+h ;
 		
 	}
 

@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 
 public class Menu extends JComponent implements ActionListener {
 
-	private JButton bwczytajObrazek;
+	private JButton bwczytajObrazek, bwczytajkontury;
 	private JButton bzapiszObrazek;
 	private JButton bprostokat;
 	private JButton belipsa;
@@ -47,6 +47,7 @@ public class Menu extends JComponent implements ActionListener {
 		textx = new JTextField("500");
 		texty = new JTextField("500");
 		ltryb = new JLabel("OFF");
+		bwczytajkontury = new  JButton("kontury");
 
 		bwczytajObrazek.setBounds(50, 50, width, height);
 		bzapiszObrazek.setBounds(150, 50, width, height);
@@ -58,6 +59,7 @@ public class Menu extends JComponent implements ActionListener {
 		textx.setBounds(400, 50, width/2, height);
 		texty.setBounds(450, 50, width/2, height);
 		ltryb.setBounds(350, 10, width+30, height);
+		bwczytajkontury.setBounds(50, 0, width, height);
 
 		add(bwczytajObrazek);
 		add(bzapiszObrazek);
@@ -69,6 +71,7 @@ public class Menu extends JComponent implements ActionListener {
 		add(textx);
 		add(texty);
 		add(ltryb);
+		add(bwczytajkontury);
 
 		tryb = Tryb.OFF;
 
@@ -81,6 +84,7 @@ public class Menu extends JComponent implements ActionListener {
 		belipsa.addActionListener(this);
 		bwielokont.addActionListener(this);
 		bedycja.addActionListener(this);
+		bwczytajkontury.addActionListener(this);
 		
 
 	}
@@ -122,6 +126,9 @@ public class Menu extends JComponent implements ActionListener {
 
 			} else if (source == bedycja) {
 				tryb = Tryb.EDYCJA;
+
+			}else if (source == bwczytajkontury) {
+				tryb = Tryb.WCZYTYWANIEKONTURY;
 
 			}
 
