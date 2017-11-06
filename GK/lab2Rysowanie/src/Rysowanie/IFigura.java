@@ -9,4 +9,8 @@ public interface IFigura {
 
 	public void paint(Graphics2D g2d, double scala);
 
+	public boolean czyedytowany(int x, int y);
+	
+	public void zmien(int x, int y);
+
 }

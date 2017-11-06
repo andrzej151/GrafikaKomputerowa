@@ -32,6 +32,7 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 	private Generator generator;
 	private MaskaWektor mwektor;
 	private Maskapierscienie mszach;
+	private IFigura FZmieniana;
 
 	public Canva() {
 		// TODO Auto-generated constructor stub
@@ -145,6 +146,8 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 			((Prostokat) prostokonty.get(prostokant)).addend(event.getX(), event.getY());
 		} else if (menu.getTryb().equals(Tryb.ELIPSAPAINT)) {
 			((Elipsa) elipsy.get(elipsa)).addend(event.getX(), event.getY());
+		} else if (menu.getTryb().equals(Tryb.EDYCJAZMIANA)) {
+			FZmieniana.zmien(event.getX(), event.getY());
 		}
 
 		repaint();
@@ -232,6 +235,33 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 			menu.setTryb(Tryb.OFF);
 			((Elipsa) elipsy.get(elipsa)).addend(event.getX(), event.getY());
 
+		} else if (menu.getTryb().equals(Tryb.EDYCJA)) {
+
+			for (IFigura f : wielokonty) {
+
+				if (f.czyedytowany(event.getX(), event.getY())) {
+					menu.setTryb(Tryb.EDYCJAZMIANA);
+					FZmieniana = f;
+				}
+			}
+			for (IFigura f : prostokonty) {
+				if (f.czyedytowany(event.getX(), event.getY())) {
+					menu.setTryb(Tryb.EDYCJAZMIANA);
+					FZmieniana = f;
+				}
+			}
+			for (IFigura f : elipsy) {
+
+				if(f.czyedytowany(event.getX(), event.getY()))
+				{
+					menu.setTryb(Tryb.EDYCJAZMIANA);
+					FZmieniana = f;
+				}
+			}
+
+		}else if (menu.getTryb().equals(Tryb.EDYCJAZMIANA)) {
+			menu.setTryb(Tryb.OFF);
+			FZmieniana.zmien(event.getX(), event.getY());
 		}
 
 		repaint();

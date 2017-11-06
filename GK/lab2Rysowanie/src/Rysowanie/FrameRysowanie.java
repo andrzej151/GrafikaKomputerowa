@@ -34,7 +34,7 @@ public class FrameRysowanie extends JFrame {
 		add(kanwa);
 		
 		listy = new Listy();
-		listy.setBounds(600, 50, 300, 900);
+		listy.setBounds(600, 50, 300, 500);
 		listy.setBackground(new Color(255, 0, 0));
 		listy.setWielokonty(wielokonty);
 		listy.setProstokonty(prostokonty);

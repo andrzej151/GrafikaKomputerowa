@@ -11,6 +11,7 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class Menu extends JComponent implements ActionListener {
@@ -20,8 +21,9 @@ public class Menu extends JComponent implements ActionListener {
 	private JButton bprostokat;
 	private JButton belipsa;
 	private JButton bwielokont;
-	private JButton btabela;
-	private JTextField textField, textx, texty;
+	private JButton bedycja;
+	private JTextField wczytaj, textx, texty;
+	private JLabel ltryb;
 	private Tryb tryb;
 	private int width = 80, height = 40;
 
@@ -35,35 +37,38 @@ public class Menu extends JComponent implements ActionListener {
 
 		// Create components and add it to the panel
 		// Utworzenie komponentów i dodanie ich do panelu okna
-		bwczytajObrazek = new JButton("WCZYTAJ");
+		bwczytajObrazek = new JButton("WCZYT");
 		bzapiszObrazek = new JButton("ZAPISZ");
-		bprostokat = new JButton("PROSTOKAT");
+		bprostokat = new JButton("PROST");
 		belipsa = new JButton("ELIPSA");
-		bwielokont = new JButton("WIELOKONT");
-		btabela = new JButton("TABELA");
-		textField = new JTextField();
+		bwielokont = new JButton("WIELO");
+		bedycja = new JButton("Edycja");
+		wczytaj = new JTextField();
 		textx = new JTextField("500");
 		texty = new JTextField("500");
+		ltryb = new JLabel("OFF");
 
 		bwczytajObrazek.setBounds(50, 50, width, height);
 		bzapiszObrazek.setBounds(150, 50, width, height);
 		bprostokat.setBounds(50, 100, width, height);
 		belipsa.setBounds(150, 100, width, height);
 		bwielokont.setBounds(250, 100, width, height);
-		btabela.setBounds(250, 50, width, height);
-		textField.setBounds(350, 100, width*2, height);
+		bedycja.setBounds(250, 50, width, height);
+		wczytaj.setBounds(350, 100, width*2, height);
 		textx.setBounds(400, 50, width/2, height);
 		texty.setBounds(450, 50, width/2, height);
+		ltryb.setBounds(350, 10, width+30, height);
 
 		add(bwczytajObrazek);
 		add(bzapiszObrazek);
 		add(bprostokat);
 		add(belipsa);
 		add(bwielokont);
-		add(btabela);
-		add(textField);
+		add(bedycja);
+		add(wczytaj);
 		add(textx);
 		add(texty);
+		add(ltryb);
 
 		tryb = Tryb.OFF;
 
@@ -75,15 +80,14 @@ public class Menu extends JComponent implements ActionListener {
 		bprostokat.addActionListener(this);
 		belipsa.addActionListener(this);
 		bwielokont.addActionListener(this);
-		btabela.addActionListener(this);
+		bedycja.addActionListener(this);
 		
 
 	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.drawString(tryb.toString(), 350, 50);
+		ltryb.setText(tryb.toString());
 	}
 
 	public Tryb getTryb() {
@@ -116,8 +120,8 @@ public class Menu extends JComponent implements ActionListener {
 			} else if (source == bwczytajObrazek) {
 				tryb = Tryb.WCZYTYWANIE;
 
-			} else if (source == btabela) {
-				tryb = Tryb.TABELA;
+			} else if (source == bedycja) {
+				tryb = Tryb.EDYCJA;
 
 			}
 
@@ -133,7 +137,7 @@ public class Menu extends JComponent implements ActionListener {
 
 	public String getfileName() {
 		// TODO Auto-generated method stub
-		return textField.getText();
+		return wczytaj.getText();
 	}
 
 	public int getwidh() {

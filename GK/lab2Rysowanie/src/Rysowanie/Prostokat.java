@@ -53,4 +53,16 @@ public class Prostokat implements IFigura{
 		
 	}
 
+	@Override
+	public boolean czyedytowany(int x, int y) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void zmien(int x, int y) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

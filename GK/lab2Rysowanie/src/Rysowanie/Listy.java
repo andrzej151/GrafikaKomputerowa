@@ -3,6 +3,7 @@ package Rysowanie;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -28,7 +29,7 @@ public class Listy extends JComponent {
 
 	public Listy() {
 
-		setLayout(new FlowLayout());
+		setLayout(new GridLayout(0,1));
 		wypelnijListe();
 
 		Lprostokaty = new JLabel("Prostokonty:");

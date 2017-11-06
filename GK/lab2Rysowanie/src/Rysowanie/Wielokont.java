@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Wielokont implements IFigura {
 
 	private ArrayList<Point> points = new ArrayList<Point>();
+	private int pointzmiany;
 	
 
 	public Wielokont() {
@@ -62,6 +63,29 @@ public class Wielokont implements IFigura {
 			s+="("+p.x+","+p.y+")";
 		}
 		return s ;
+		
+	}
+
+	@Override
+	public boolean czyedytowany(int x, int y) {
+		// TODO Auto-generated method stub
+		int i=0;
+		for(Point p: points) {
+			if(Math.abs(p.x-x)<4 && Math.abs(p.y-y)<4)
+			{
+				pointzmiany = i;
+				return true;
+			}
+			i++;
+		}
+		return false;
+	}
+
+	@Override
+	public void zmien(int x, int y) {
+		// TODO Auto-generated method stub
+		points.get(pointzmiany).x=x;
+		points.get(pointzmiany).y=y;
 		
 	}
 
