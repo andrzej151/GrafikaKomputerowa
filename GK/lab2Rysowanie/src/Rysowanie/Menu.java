@@ -146,6 +146,11 @@ public class Menu extends JComponent implements ActionListener {
 		// TODO Auto-generated method stub
 		return wczytaj.getText();
 	}
+	
+	public void setfileName(String name) {
+		// TODO Auto-generated method stub
+		 wczytaj.setText(name);
+	}
 
 	public int getwidh() {
 		// TODO Auto-generated method stub

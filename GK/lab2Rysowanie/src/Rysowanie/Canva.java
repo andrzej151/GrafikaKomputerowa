@@ -346,22 +346,11 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 				 }
 			}
 			
-			try {
-				
-				
-				obrazek1 = ImageIO.read(new File(nazwapliku));
-				System.out.println(obrazek1.getWidth()+" "+ obrazek1.getHeight());
-				setPreferredSize(new Dimension(obrazek1.getWidth(), obrazek1.getHeight()));
-				
-			} catch (IOException e) {
-				menu.setTryb(Tryb.ERROR);
-
-			}
-				
+		
 			in.close();
-			System.out.println(" image created successfully");
-			menu.setTryb(Tryb.OFF);
-			repaint();
+			menu.setfileName(nazwapliku);
+			menu.setTryb(Tryb.WCZYTYWANIE);
+			
 		} catch (IOException e) {
 			System.out.println("The image cannot be stored");
 		}
