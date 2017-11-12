@@ -13,5 +13,6 @@ public interface IFigura {
 	public boolean czyedytowany(int x, int y);
 	
 	public void zmien(int x, int y);
+	public String zapisz();
 
 }

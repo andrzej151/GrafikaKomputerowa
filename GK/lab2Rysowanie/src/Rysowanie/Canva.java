@@ -25,6 +25,7 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 public class Canva extends JPanel implements MouseListener, MouseMotionListener {
 	private ArrayList<IFigura> wielokonty = new ArrayList<IFigura>();
@@ -39,7 +40,9 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 	private MaskaWektor mwektor;
 	private Maskapierscienie mszach;
 	private IFigura FZmieniana;
-
+	private String nazwapliku;
+	
+	
 	public Canva() {
 		// TODO Auto-generated constructor stub
 		wielokont = -1;
@@ -47,6 +50,8 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 		elipsa = -1;
 		addMouseListener(this);
 		addMouseMotionListener(this);
+		
+        
 	}
 
 	public void setBounds(int startx, int starty, int with, int height) {
@@ -98,7 +103,7 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 			g2d.setColor(Color.white);
 			g2d.fill(rect);
 		} else {
-			g2d.drawImage(obrazek1, 0, 0, with, height, null);
+			g2d.drawImage(obrazek1, 0, 0, null);
 		}
 
 		// Fill rectangular area to show how XOR drawing renders
@@ -289,8 +294,11 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 	public void wczytaj() {
 
 		try {
-			String image_name = menu.getfileName();
-			obrazek1 = ImageIO.read(new File(image_name));
+			
+			 nazwapliku = menu.getfileName();
+			obrazek1 = ImageIO.read(new File(nazwapliku));
+			System.out.println(obrazek1.getWidth()+" "+ obrazek1.getHeight());
+			setPreferredSize(new Dimension(obrazek1.getWidth(), obrazek1.getHeight()));
 			menu.setTryb(Tryb.OFF);
 		} catch (IOException e) {
 			menu.setTryb(Tryb.ERROR);
@@ -308,6 +316,8 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 			String line;
 			String [] w;
 			Scanner in = new Scanner(new File(name+".txt"));
+			nazwapliku=in.nextLine();
+			
 			 
 			while(in.hasNextLine())
 			{
@@ -324,7 +334,7 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 						 elipsy.add(new Elipsa(w[1],w[2],w[3],w[4]));
 					 
 				 }
-				/* if(w[0].equals("w")) 
+				 if(w[0].equals("w")) 
 				 {
 					 Wielokont wi= new Wielokont();
 					 for(int i=1;i<w.length;i+=2) {
@@ -333,12 +343,25 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 						 wi.addPoint(po);
 					 }
 					 wielokonty.add(wi);
-				 }*/
+				 }
+			}
+			
+			try {
+				
+				
+				obrazek1 = ImageIO.read(new File(nazwapliku));
+				System.out.println(obrazek1.getWidth()+" "+ obrazek1.getHeight());
+				setPreferredSize(new Dimension(obrazek1.getWidth(), obrazek1.getHeight()));
+				
+			} catch (IOException e) {
+				menu.setTryb(Tryb.ERROR);
+
 			}
 				
 			in.close();
 			System.out.println(" image created successfully");
 			menu.setTryb(Tryb.OFF);
+			repaint();
 		} catch (IOException e) {
 			System.out.println("The image cannot be stored");
 		}
@@ -349,14 +372,16 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 
 			String name = menu.getfileName();
 			PrintWriter out = new PrintWriter(new File(name+".txt"));
+			out.println(nazwapliku);
+			
 			for (IFigura f : prostokonty) {
-				out.println(f);
+				out.println(f.zapisz());
 			}
 			for (IFigura f : elipsy) {
-				out.println(f);
+				out.println(f.zapisz());
 			}
 			for (IFigura f : wielokonty) {
-				out.println(f);
+				out.println(f.zapisz());
 			}
 			out.close();
 

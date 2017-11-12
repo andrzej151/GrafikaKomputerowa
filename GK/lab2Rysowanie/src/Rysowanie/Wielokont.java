@@ -58,13 +58,23 @@ public class Wielokont implements IFigura, Serializable {
 	}
 	
 	public String toString() {
-		String s="wx ";
+		String s="wielokont: ";
 		for(Point p :points)
 		{
-			s+="x"+p.x+"x"+p.y+"x";
+			s+="("+p.x+","+p.y+") ";
 		}
 		return s ;
 		
+	}
+	
+	
+	public String zapisz() {
+		String s="wx";
+		for(Point p :points)
+		{
+			s+=""+p.x+"x"+p.y+"x";
+		}
+		return s ;
 	}
 
 	@Override

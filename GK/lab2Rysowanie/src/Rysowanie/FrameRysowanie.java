@@ -1,6 +1,7 @@
 package Rysowanie;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -9,12 +10,15 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 public class FrameRysowanie extends JFrame {
 
 	private Canva kanwa;
 	private Menu menu;
 	private Listy listy;
+	private  JScrollPane scrollPane;
+	JPanel contentPane;
 	
 
 	private ArrayList<IFigura> wielokonty = new ArrayList<IFigura>();
@@ -31,7 +35,13 @@ public class FrameRysowanie extends JFrame {
 		kanwa.setWielokonty(wielokonty);
 		kanwa.setProstokonty(prostokonty);
 		kanwa.setElipsy(elipsy);
-		add(kanwa);
+		//add(kanwa);
+		
+		scrollPane = new JScrollPane(kanwa);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setBounds(50, 180, 500, 500);
+        add(scrollPane);
 		
 		listy = new Listy();
 		listy.setBounds(600, 50, 300, 500);
@@ -43,6 +53,7 @@ public class FrameRysowanie extends JFrame {
 		add(listy);
 
 		menu = new Menu();
+		menu.setBounds(50,0,520,170);
 		kanwa.setMenu(menu);
 		add(menu);
 		

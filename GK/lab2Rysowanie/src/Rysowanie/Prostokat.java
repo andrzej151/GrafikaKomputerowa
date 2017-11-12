@@ -59,8 +59,12 @@ public class Prostokat implements IFigura, Serializable {
 	}
 
 	public String toString() {
-		return "px" + x + "x" + y + "x" + w + "x" + h;
-
+		return "prostokat: "+x+" "+y+" "+w+" "+h ;
+		
+	}
+	
+	public String zapisz() {
+		return "px"+x+"x"+y+"x"+w+"x"+h ;
 	}
 
 	@Override

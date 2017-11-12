@@ -58,8 +58,12 @@ public class Elipsa implements IFigura, Serializable {
 	}
 	
 	public String toString() {
-		return "ex"+x+"x"+y+"x"+w+"x"+h ;
+		return "elipsa: "+x+" "+y+" "+w+" "+h ;
 		
+	}
+	
+	public String zapisz() {
+		return "ex"+x+"x"+y+"x"+w+"x"+h ;
 	}
 
 	@Override
