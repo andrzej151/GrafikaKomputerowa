@@ -19,11 +19,14 @@ public class Wielokont implements IFigura, Serializable {
 	@Override
 	public void paint(Graphics2D g2d, Menu menu) {
 		// TODO Auto-generated method stub
-
-		for (int i = 0; i < (points.size() - 1); i++) {
+		
+		int i;
+		for (i = 0; i < (points.size() - 1); i++) {
 			g2d.drawLine(points.get(i).x, points.get(i).y, points.get(i + 1).x, points.get(i + 1).y);
 
 		}
+		
+		g2d.drawLine(points.get(i).x, points.get(i).y, points.get(0).x, points.get(0).y);
 
 	}
 
@@ -48,12 +51,17 @@ public class Wielokont implements IFigura, Serializable {
 	@Override
 	public void paint(Graphics2D g2d, double scala) {
 		// TODO Auto-generated method stub
-		 int[] tbx= new int[ points.size()];
-		 int[] tby= new int[ points.size()];
-		for (int i = 0; i < points.size() ; i++) {
+		
+		 int[] tbx= new int[ points.size()+1];
+		 int[] tby= new int[ points.size()+1];
+		 int i;
+		 
+		for (i = 0; i < points.size() ; i++) {
 			tbx[i]=(int)(points.get(i).x*scala);
 			tby[i]=(int)(points.get(i).y*scala);
 		}
+		
+		
 		g2d.fillPolygon(tbx, tby, tbx.length);
 	}
 	
