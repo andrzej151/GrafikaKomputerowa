@@ -118,6 +118,7 @@ public class Menu extends JComponent implements ActionListener {
 					funkcja = Tryb.WCZYTYWANIE;
 				}
 			}else if (source == bprosta) {
+				
 				funkcja = Tryb.RYSUJPROSTA;
 			}
 
@@ -144,6 +145,29 @@ public class Menu extends JComponent implements ActionListener {
 		// Wymuszenie przerysowania okna aby uzyskaæ efekt operacji natychmiast
 		repaint();
 	}
+	
+	public double getA() {
+		// TODO Auto-generated method stub
+		return Double.parseDouble(fa.getText());
+	}
+	
+	public double getB() {
+		// TODO Auto-generated method stub
+		return Double.parseDouble(fb.getText());
+	}
+	
+	
+	public Tryb funkcja()
+	{
+		return funkcja;
+	}
+	
+	public Tryb tryb()
+	{
+		return tryb;
+	}
+
+	
 
 	public String getfileName() {
 		// TODO Auto-generated method stub
@@ -153,6 +177,12 @@ public class Menu extends JComponent implements ActionListener {
 	public void setfileName(String name) {
 		// TODO Auto-generated method stub
 		lstan.setText(name);
+	}
+
+	public void setFunkcja(Tryb tryb) {
+		// TODO Auto-generated method stub
+		funkcja= tryb;
+		
 	}
 
 }

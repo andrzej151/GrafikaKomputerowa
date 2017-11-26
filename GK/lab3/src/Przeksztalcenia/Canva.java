@@ -18,19 +18,18 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 
 	private int with, height, starty, startx;
 	private int Maxwith, Maxheight, rozdzielczosc, srodekx, srodeky;
+	private Menu menu;
 
 	public Canva() {
 		// TODO Auto-generated constructor stub
 		addMouseListener(this);
 		addMouseMotionListener(this);
-		
-		
-		
+
 		Maxwith = 2000;
 		Maxheight = 2000;
 		rozdzielczosc = 50;
-		srodekx=Maxwith/2;
-		srodeky=Maxheight/2;
+		srodekx = Maxwith / 2;
+		srodeky = Maxheight / 2;
 		setSize(Maxwith, Maxheight);
 
 	}
@@ -53,38 +52,62 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 		setSize(Maxwith, Maxheight);
 
 		this.setBackground(Color.white);
-		
+
 		siatka(g2d);
-		
-		
-		
+		prosta(g2d);
 
 	}
-	
-	private void siatka(Graphics2D g2d)
-	{
-		//siatka
+
+	private void prosta(Graphics2D g2d) {
+		// TODO Auto-generated method stub
+		double a = 1;
+		double b = 0;
+		try {
+			a = menu.getA();
+			b = menu.getB();
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+
+		g2d.setColor(Color.BLACK);
+		g2d.setStroke(new BasicStroke(2));
+
+		int x0, y0, xk, yk;
+		y0 = (int) (Maxheight/2-((a * (-(Maxwith / 2))) + b));
+		x0 = 0;
+		yk = (int) (Maxheight/2-((a * ((Maxwith / 2))) + b));
+		xk = Maxwith;
+		
+		System.out.println(x0+" "+y0+" "+xk+" "+yk);
+
+		g2d.drawLine(x0, y0, xk, yk);
+
+		g2d.setStroke(new BasicStroke(1));
+
+	}
+
+	private void siatka(Graphics2D g2d) {
+		// siatka
 		setPreferredSize(new Dimension(Maxwith, Maxheight));
-				g2d.setColor(Color.GRAY);
-				for(int i = 0; i<Maxwith;i+=rozdzielczosc)
-				{
-					g2d.drawLine(i, 0, i, Maxheight);
-				}
-				
-				for(int i = 0; i<Maxheight;i+=rozdzielczosc)
-				{
-					g2d.drawLine(0, i, Maxwith, i);
-				}
-				
-				g2d.setColor(Color.BLACK);
-				g2d.setStroke(new BasicStroke(2)); 
-				
-				g2d.drawLine(Maxwith/2, 0, Maxheight/2, Maxheight);
-				g2d.drawLine(0, Maxheight/2, Maxwith, Maxheight/2);
-				
-				g2d.setStroke(new BasicStroke(1)); 
-				
-				
+		g2d.setColor(Color.GRAY);
+		for (int i = 0; i < Maxwith; i += rozdzielczosc) {
+			g2d.drawLine(i, 0, i, Maxheight);
+		}
+
+		for (int i = 0; i < Maxheight; i += rozdzielczosc) {
+			g2d.drawLine(0, i, Maxwith, i);
+		}
+
+		g2d.setColor(Color.BLACK);
+		g2d.setStroke(new BasicStroke(2));
+
+		g2d.drawLine(Maxwith / 2, 0, Maxheight / 2, Maxheight);
+		g2d.drawLine(0, Maxheight / 2, Maxwith, Maxheight / 2);
+
+		g2d.setStroke(new BasicStroke(1));
+		menu.setFunkcja(Tryb.OFF);
+
 	}
 
 	@Override
@@ -127,6 +150,11 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public void setMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		this.menu = menu;
 	}
 
 }

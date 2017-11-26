@@ -38,6 +38,8 @@ public class Widok extends JFrame {
 		menu.setBounds(50, 0, 520, 170);
 
 		add(menu);
+		
+		kanwa.setMenu(menu);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(50, 50, 1050, 1050);
