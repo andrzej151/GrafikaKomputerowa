@@ -2,6 +2,7 @@ package Przeksztalcenia;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Shape;
@@ -23,11 +24,14 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		
-		Maxwith = 1000;
-		Maxheight = 1000;
-		rozdzielczosc = 10;
+		
+		
+		Maxwith = 2000;
+		Maxheight = 2000;
+		rozdzielczosc = 50;
 		srodekx=Maxwith/2;
 		srodeky=Maxheight/2;
+		setSize(Maxwith, Maxheight);
 
 	}
 
@@ -46,36 +50,41 @@ public class Canva extends JPanel implements MouseListener, MouseMotionListener 
 
 		Graphics2D g2d = (Graphics2D) g;
 
-		Rectangle2D.Double rect = new Rectangle2D.Double(0, 0, with - 1, height - 1);
+		setSize(Maxwith, Maxheight);
 
-		rect = new Rectangle2D.Double(0, 0, Maxwith, Maxheight);
-		g2d.setColor(Color.white);
-		g2d.fill(rect);
+		this.setBackground(Color.white);
 		
-		g2d.setColor(Color.black);
-		g2d.draw(rect);
+		siatka(g2d);
 		
+		
+		
+
+	}
+	
+	private void siatka(Graphics2D g2d)
+	{
 		//siatka
-		g2d.setColor(Color.GRAY);
-		for(int i = 0; i<Maxwith;i+=rozdzielczosc)
-		{
-			g2d.drawLine(i, 0, i, Maxheight);
-		}
-		
-		for(int i = 0; i<Maxheight;i+=rozdzielczosc)
-		{
-			g2d.drawLine(0, i, Maxwith, i);
-		}
-		
-		g2d.setColor(Color.BLACK);
-		g2d.setStroke(new BasicStroke(2)); 
-		
-		g2d.drawLine(Maxwith/2, 0, Maxheight/2, Maxheight);
-		g2d.drawLine(0, Maxheight/2, Maxwith, Maxheight/2);
-		
-		g2d.setStroke(new BasicStroke(1)); 
-		
-
+		setPreferredSize(new Dimension(Maxwith, Maxheight));
+				g2d.setColor(Color.GRAY);
+				for(int i = 0; i<Maxwith;i+=rozdzielczosc)
+				{
+					g2d.drawLine(i, 0, i, Maxheight);
+				}
+				
+				for(int i = 0; i<Maxheight;i+=rozdzielczosc)
+				{
+					g2d.drawLine(0, i, Maxwith, i);
+				}
+				
+				g2d.setColor(Color.BLACK);
+				g2d.setStroke(new BasicStroke(2)); 
+				
+				g2d.drawLine(Maxwith/2, 0, Maxheight/2, Maxheight);
+				g2d.drawLine(0, Maxheight/2, Maxwith, Maxheight/2);
+				
+				g2d.setStroke(new BasicStroke(1)); 
+				
+				
 	}
 
 	@Override
