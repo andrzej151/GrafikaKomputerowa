@@ -15,9 +15,10 @@ public class Widok extends JFrame {
 	// private Menu menu;
 
 	private JScrollPane scrollPane;
-	JPanel contentPane;
-	JButton b;
-	Menu menu;
+	private JPanel contentPane;
+	private JButton b;
+	private Menu menu;
+
 
 	public Widok() {
 		super("Przeksztalcenia - lab 3 GK");
@@ -35,14 +36,14 @@ public class Widok extends JFrame {
 		add(scrollPane);
 
 		menu = new Menu();
-		menu.setBounds(50, 0, 520, 170);
+		menu.setBounds(50, 0, 900, 900);
 
 		add(menu);
 		
 		kanwa.setMenu(menu);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(50, 50, 1050, 1050);
+		setBounds(0, 0, 1050, 1050);
 		setVisible(true);
 	}
 }

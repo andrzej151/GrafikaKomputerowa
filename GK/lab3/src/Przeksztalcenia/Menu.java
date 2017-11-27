@@ -12,10 +12,13 @@ import javax.swing.JTextField;
 public class Menu extends JComponent implements ActionListener {
 
 	private JButton bwektor, bobrazek, bprosta;
-	private JTextField fnazwa, fa, fb;
+	private JTextField fnazwa, fa, fb, fnazwazl;
 	private Tryb tryb, funkcja;
 	private JLabel la, lb, lnazwa, lstan;
-	private int width = 80, height = 40;
+	private int width = 100, height = 40;
+	private  JTextField [][] macierzobrut, macierzprzesuniecie, macierzskalowanie ;
+	
+	private JButton bskalowanie, bprzesuniecie, bobrot, bzlorzony;
 
 	public Menu() {
 		super();
@@ -30,9 +33,9 @@ public class Menu extends JComponent implements ActionListener {
 		bobrazek = new JButton("OBRAZEK");
 		bprosta = new JButton("PROSTA");
 
-		bwektor.setBounds(10, 10, 100, height);
-		bobrazek.setBounds(110, 10, 100, height);
-		bprosta.setBounds(10, 50, 100, height);
+		bwektor.setBounds(10, 10, width, height);
+		bobrazek.setBounds(120, 10, width, height);
+		bprosta.setBounds(10, 60, width, height);
 
 		// Add listener to allow reacting to clicking -
 		// The same listener is used by all buttons
@@ -44,38 +47,84 @@ public class Menu extends JComponent implements ActionListener {
 		add(bwektor);
 		add(bobrazek);
 		add(bprosta);
+		
+		
+		bobrot = new JButton("OBROT");
+		bobrot.setBounds(600, 10, width+50, height);
+		bobrot.addActionListener(this);
+		add(bobrot);
+		stworzmacierz(macierzobrut, 600, height+20, 60, 40);
+		
+		
+		bprzesuniecie = new JButton("Przesuniecie");
+		bprzesuniecie.setBounds(600, 210, width+50, height);
+		bprzesuniecie.addActionListener(this);
+		add(bprzesuniecie);
+		stworzmacierz(macierzprzesuniecie, 600, 260, 60, 40);
+		
+		bskalowanie = new JButton("Skalowanie");
+		bskalowanie.setBounds(600, 420, width+50, height);
+		bskalowanie.addActionListener(this);
+		add(bskalowanie);
+		stworzmacierz(macierzskalowanie, 600, 470, 60, 40);
+		
+
+		bzlorzony = new JButton("Zlorzone");
+		bzlorzony.setBounds(600, 630, width, height);
+		bzlorzony.addActionListener(this);
+		add(bzlorzony);
+		
+		fnazwazl = new JTextField();
+		fnazwazl.setBounds(710, 630, width, height);
+		add(fnazwazl);
 
 		la = new JLabel("y=");
-		la.setBounds(110, 50, 20, 40);
+		la.setBounds(120, 60, 20, 40);
 		add(la);
 
 		lb = new JLabel("*x+");
-		lb.setBounds(180, 50, 20, 40);
+		lb.setBounds(190, 60, 20, 40);
 		add(lb);
 
 		lnazwa = new JLabel("Nazwa pliku");
-		lnazwa.setBounds(220, 10, 100, 40);
+		lnazwa.setBounds(240, 10, 100, 40);
 		add(lnazwa);
 
 		lstan = new JLabel();
-		lstan.setBounds(10, 100, 150, 40);
+		lstan.setBounds(10, 110, 150, 40);
 		add(lstan);
 
 		fa = new JTextField();
-		fa.setBounds(130, 50, 50, 40);
+		fa.setBounds(140, 60, 50, 40);
 		add(fa);
 
 		fb = new JTextField();
-		fb.setBounds(200, 50, 50, 40);
+		fb.setBounds(210, 60, 50, 40);
 		add(fb);
 
 		fnazwa = new JTextField();
-		fnazwa.setBounds(310, 10, 100, 40);
+		fnazwa.setBounds(320, 10, 100, 40);
 		add(fnazwa);
 
+	
 		tryb = Tryb.OFF;
 		funkcja = Tryb.OFF;
 
+	}
+	
+	public void stworzmacierz(JTextField [][] macierz, int poczatekx, int poczateky, int w, int h)
+	{
+		
+		macierz = new JTextField[3][3];
+		for(int i=0; i<3; i++)
+		{
+			for(int j=0; j<3; j++)
+			{
+				macierz[i][j] = new JTextField();
+				macierz[i][j].setBounds(poczatekx+i*(w+10), poczateky+j*(h+10), w, h);
+				add(macierz[i][j]);
+			}
+		}
 	}
 
 	public void paintComponent(Graphics g) {
