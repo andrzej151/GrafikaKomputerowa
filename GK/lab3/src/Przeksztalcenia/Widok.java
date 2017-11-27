@@ -1,49 +1,184 @@
 package Przeksztalcenia;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.util.ArrayList;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Shape;
+import java.awt.Stroke;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.geom.Rectangle2D;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
-public class Widok extends JFrame {
+public class Widok extends JPanel implements MouseListener, MouseMotionListener {
 
-	private Canva kanwa;
-	// private Menu menu;
-
-	private JScrollPane scrollPane;
-	private JPanel contentPane;
-	private JButton b;
-	private Menu menu;
-
+	private int with, height, starty, startx;
+	private int Maxwith, Maxheight, rozdzielczosc, srodekx, srodeky;
+	private Controler controler;
+	private Model model;
 
 	public Widok() {
-		super("Przeksztalcenia - lab 3 GK");
+		// TODO Auto-generated constructor stub
+		addMouseListener(this);
+		addMouseMotionListener(this);
 
-		kanwa = new Canva();
-		kanwa.setBounds(50, 150, 250, 250);
+		Maxwith = 2000;
+		Maxheight = 2000;
+		rozdzielczosc = 50;
+		srodekx = Maxwith / 2;
+		srodeky = Maxheight / 2;
+		setSize(Maxwith, Maxheight);
 
-	
-
-		scrollPane = new JScrollPane();
-		scrollPane.setViewportView(kanwa);
-		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(50, 180, 500, 500);
-		add(scrollPane);
-
-		menu = new Menu();
-		menu.setBounds(50, 0, 900, 900);
-
-		add(menu);
-		
-		kanwa.setMenu(menu);
-
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 1050, 1050);
-		setVisible(true);
 	}
+
+	public void setBounds(int startx, int starty, int with, int height) {
+		this.startx = startx;
+		this.starty = starty;
+		this.with = with;
+		this.height = height;
+
+		super.setBounds(startx, starty, with, height);
+
+	}
+
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+
+		Graphics2D g2d = (Graphics2D) g;
+
+		setSize(Maxwith, Maxheight);
+
+		this.setBackground(Color.white);
+
+		siatka(g2d);
+		prosta(g2d);
+		wektor(g2d);
+		obrazek(g2d);
+
+	}
+
+	private void obrazek(Graphics2D g2d) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void wektor(Graphics2D g2d) {
+		// TODO Auto-generated method stub
+		if (model.pierwszywektor()) {
+			Wektor wektor;
+			while (model.nastepnywektor()) {
+				wektor = model.getWektor();
+				g2d.drawLine(Maxwith / 2 + wektor.xs, Maxheight / 2 + wektor.ys, Maxwith / 2 + wektor.xk,
+						Maxheight / 2 + wektor.yk);
+			}
+		}
+	}
+
+	private void prosta(Graphics2D g2d) {
+		// TODO Auto-generated method stub
+		double a = 1;
+		double b = 0;
+		try {
+			a = controler.getA();
+			b = controler.getB();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		g2d.setColor(Color.BLACK);
+		g2d.setStroke(new BasicStroke(2));
+
+		int x0, y0, xk, yk;
+		y0 = (int) (Maxheight / 2 - ((a * (-(Maxwith / 2))) + b));
+		x0 = 0;
+		yk = (int) (Maxheight / 2 - ((a * ((Maxwith / 2))) + b));
+		xk = Maxwith;
+
+		System.out.println(x0 + " " + y0 + " " + xk + " " + yk);
+
+		g2d.drawLine(x0, y0, xk, yk);
+
+		g2d.setStroke(new BasicStroke(1));
+
+	}
+
+	private void siatka(Graphics2D g2d) {
+		// siatka
+		setPreferredSize(new Dimension(Maxwith, Maxheight));
+		g2d.setColor(Color.GRAY);
+		for (int i = 0; i < Maxwith; i += rozdzielczosc) {
+			g2d.drawLine(i, 0, i, Maxheight);
+		}
+
+		for (int i = 0; i < Maxheight; i += rozdzielczosc) {
+			g2d.drawLine(0, i, Maxwith, i);
+		}
+
+		g2d.setColor(Color.BLACK);
+		g2d.setStroke(new BasicStroke(2));
+
+		g2d.drawLine(Maxwith / 2, 0, Maxheight / 2, Maxheight);
+		g2d.drawLine(0, Maxheight / 2, Maxwith, Maxheight / 2);
+
+		g2d.setStroke(new BasicStroke(1));
+		controler.setFunkcja(Tryb.OFF);
+
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void setControler(Controler menu) {
+		// TODO Auto-generated method stub
+		this.controler = menu;
+	}
+
+	public void setModel(Model model) {
+		// TODO Auto-generated method stub
+		this.model = model;
+	}
+
 }
