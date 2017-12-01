@@ -153,6 +153,8 @@ public class Controler extends JComponent implements ActionListener {
 				if (tryb.equals(Tryb.WEKTOR)) {
 					tryb = Tryb.OFF;
 					funkcja = Tryb.OFF;
+					model.wczytajWektor(fnazwa.getText());
+					widok.repaint();
 
 				} else {
 					

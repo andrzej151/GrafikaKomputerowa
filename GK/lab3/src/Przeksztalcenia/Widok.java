@@ -69,12 +69,21 @@ public class Widok extends JPanel implements MouseListener, MouseMotionListener 
 	private void wektor(Graphics2D g2d) {
 		// TODO Auto-generated method stub
 		if (model.pierwszywektor()) {
+			g2d.setColor(Color.BLUE);
+			g2d.setStroke(new BasicStroke(2));
+			System.out.println("okok");
 			Wektor wektor;
+			
 			while (model.nastepnywektor()) {
 				wektor = model.getWektor();
-				g2d.drawLine(Maxwith / 2 + wektor.xs, Maxheight / 2 + wektor.ys, Maxwith / 2 + wektor.xk,
-						Maxheight / 2 + wektor.yk);
+				System.out.println(wektor);
+				g2d.drawLine(Maxwith / 2 + (int)wektor.xs, Maxheight / 2 - (int)wektor.ys, Maxwith / 2 + (int)wektor.xk,
+						Maxheight / 2 - (int)wektor.yk);
 			}
+			
+			g2d.setColor(Color.BLACK);
+			g2d.setStroke(new BasicStroke(1));
+
 		}
 	}
 
@@ -98,7 +107,7 @@ public class Widok extends JPanel implements MouseListener, MouseMotionListener 
 		yk = (int) (Maxheight / 2 - ((a * ((Maxwith / 2))) + b));
 		xk = Maxwith;
 
-		System.out.println(x0 + " " + y0 + " " + xk + " " + yk);
+		//System.out.println(x0 + " " + y0 + " " + xk + " " + yk);
 
 		g2d.drawLine(x0, y0, xk, yk);
 

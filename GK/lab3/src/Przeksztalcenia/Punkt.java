@@ -27,6 +27,12 @@ public class Punkt {
 		w=1;
 	}
 	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "("+x+","+y+")";
+	}
+	
 	public Punkt(double x, double y)
 	{
 		this.x=x;

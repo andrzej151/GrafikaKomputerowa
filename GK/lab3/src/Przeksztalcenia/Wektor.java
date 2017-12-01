@@ -1,5 +1,10 @@
 package Przeksztalcenia;
 
 public class Wektor {
-	int xs,ys,xk,yk;
+	double xs,ys,xk,yk;
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return xs+" "+ys+" "+xk+" "+yk;
+	}
 }

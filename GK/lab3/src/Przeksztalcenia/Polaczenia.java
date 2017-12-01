@@ -24,4 +24,9 @@ public class Polaczenia {
 	public void setB(Punkt b) {
 		this.b = b;
 	}
+	  @Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return a+"->"+b;
+	}
 }
