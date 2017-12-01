@@ -54,15 +54,21 @@ public class Widok extends JPanel implements MouseListener, MouseMotionListener 
 
 		this.setBackground(Color.white);
 
-		siatka(g2d);
-		prosta(g2d);
-		wektor(g2d);
 		obrazek(g2d);
+		siatka(g2d);
+		wektor(g2d);
+		prosta(g2d);
 
 	}
 
 	private void obrazek(Graphics2D g2d) {
 		// TODO Auto-generated method stub
+		if (model.isObrazek()) {
+			System.out.println("ok");
+			g2d.drawImage(model.getImages(), Maxwith / 2 - model.getImageW() / 2, Maxheight / 2 - model.getImageH() / 2,
+					null);
+
+		}
 
 	}
 
@@ -73,14 +79,14 @@ public class Widok extends JPanel implements MouseListener, MouseMotionListener 
 			g2d.setStroke(new BasicStroke(2));
 			System.out.println("okok");
 			Wektor wektor;
-			
+
 			while (model.nastepnywektor()) {
 				wektor = model.getWektor();
 				System.out.println(wektor);
-				g2d.drawLine(Maxwith / 2 + (int)wektor.xs, Maxheight / 2 - (int)wektor.ys, Maxwith / 2 + (int)wektor.xk,
-						Maxheight / 2 - (int)wektor.yk);
+				g2d.drawLine(Maxwith / 2 + (int) wektor.xs, Maxheight / 2 - (int) wektor.ys,
+						Maxwith / 2 + (int) wektor.xk, Maxheight / 2 - (int) wektor.yk);
 			}
-			
+
 			g2d.setColor(Color.BLACK);
 			g2d.setStroke(new BasicStroke(1));
 
@@ -107,7 +113,7 @@ public class Widok extends JPanel implements MouseListener, MouseMotionListener 
 		yk = (int) (Maxheight / 2 - ((a * ((Maxwith / 2))) + b));
 		xk = Maxwith;
 
-		//System.out.println(x0 + " " + y0 + " " + xk + " " + yk);
+		// System.out.println(x0 + " " + y0 + " " + xk + " " + yk);
 
 		g2d.drawLine(x0, y0, xk, yk);
 

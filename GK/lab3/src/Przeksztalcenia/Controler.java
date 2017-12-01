@@ -16,8 +16,8 @@ public class Controler extends JComponent implements ActionListener {
 	private Tryb tryb, funkcja;
 	private JLabel la, lb, lnazwa, lstan;
 	private int width = 100, height = 40;
-	private  JTextField [][] macierzobrut, macierzprzesuniecie, macierzskalowanie ;
-	
+	private JTextField[][] macierzobrut, macierzprzesuniecie, macierzskalowanie;
+
 	private JButton bskalowanie, bprzesuniecie, bobrot, bzlorzony;
 	private Model model;
 	private Widok widok;
@@ -49,33 +49,30 @@ public class Controler extends JComponent implements ActionListener {
 		add(bwektor);
 		add(bobrazek);
 		add(bprosta);
-		
-		
+
 		bobrot = new JButton("OBROT");
-		bobrot.setBounds(600, 10, width+50, height);
+		bobrot.setBounds(600, 10, width + 50, height);
 		bobrot.addActionListener(this);
 		add(bobrot);
-		stworzmacierz(macierzobrut, 600, height+20, 60, 40);
-		
-		
+		stworzmacierz(macierzobrut, 600, height + 20, 60, 40);
+
 		bprzesuniecie = new JButton("Przesuniecie");
-		bprzesuniecie.setBounds(600, 210, width+50, height);
+		bprzesuniecie.setBounds(600, 210, width + 50, height);
 		bprzesuniecie.addActionListener(this);
 		add(bprzesuniecie);
 		stworzmacierz(macierzprzesuniecie, 600, 260, 60, 40);
-		
+
 		bskalowanie = new JButton("Skalowanie");
-		bskalowanie.setBounds(600, 420, width+50, height);
+		bskalowanie.setBounds(600, 420, width + 50, height);
 		bskalowanie.addActionListener(this);
 		add(bskalowanie);
 		stworzmacierz(macierzskalowanie, 600, 470, 60, 40);
-		
 
 		bzlorzony = new JButton("Zlorzone");
 		bzlorzony.setBounds(600, 630, width, height);
 		bzlorzony.addActionListener(this);
 		add(bzlorzony);
-		
+
 		fnazwazl = new JTextField();
 		fnazwazl.setBounds(710, 630, width, height);
 		add(fnazwazl);
@@ -108,22 +105,19 @@ public class Controler extends JComponent implements ActionListener {
 		fnazwa.setBounds(320, 10, 100, 40);
 		add(fnazwa);
 
-	
 		tryb = Tryb.OFF;
 		funkcja = Tryb.OFF;
 
 	}
-	
-	public void stworzmacierz(JTextField [][] macierz, int poczatekx, int poczateky, int w, int h)
-	{
-		
+
+	public void stworzmacierz(JTextField[][] macierz, int poczatekx, int poczateky, int w, int h) {
+
 		macierz = new JTextField[3][3];
-		for(int i=0; i<3; i++)
-		{
-			for(int j=0; j<3; j++)
-			{
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
 				macierz[i][j] = new JTextField();
-				macierz[i][j].setBounds(poczatekx+i*(w+10), poczateky+j*(h+10), w, h);
+				macierz[i][j].setBounds(poczatekx + i * (w + 10), poczateky + j * (h + 10), w, h);
+				macierz[i][j].setText("0.0");
 				add(macierz[i][j]);
 			}
 		}
@@ -148,89 +142,99 @@ public class Controler extends JComponent implements ActionListener {
 		// TODO Auto-generated method stub
 		Object source = event.getSource();
 
-	
-			if (source == bwektor) {
-				if (tryb.equals(Tryb.WEKTOR)) {
-					tryb = Tryb.OFF;
+		if (source == bwektor) {
+			if (tryb.equals(Tryb.WEKTOR)) {
+				tryb = Tryb.OFF;
+				funkcja = Tryb.OFF;
+				model.wczytajWektor(fnazwa.getText());
+				widok.repaint();
+
+			} else {
+
+				if (model.wczytajWektor(fnazwa.getText())) {
+					tryb = Tryb.WEKTOR;
 					funkcja = Tryb.OFF;
-					model.wczytajWektor(fnazwa.getText());
-					widok.repaint();
-
 				} else {
-					
-					if(model.wczytajWektor(fnazwa.getText()))
-					{
-						tryb = Tryb.WEKTOR;
-						funkcja = Tryb.OFF;
-					}else
-					{
-						tryb = Tryb.OFF;
-						funkcja = Tryb.OFF;
-
-					}
-					
-				}
-
-			} else if (source == bobrazek) {
-				if (tryb.equals(Tryb.OBRAZEK)) {
 					tryb = Tryb.OFF;
 					funkcja = Tryb.OFF;
 
-				} else {
-					tryb = Tryb.OBRAZEK;
-					funkcja = Tryb.WCZYTYWANIE;
 				}
-			}else if (source == bprosta) {
-				
-				funkcja = Tryb.RYSUJPROSTA;
+
 			}
 
-			// } else if (source == bwektor) {
-			// tryb = Tryb.WIELOKONT;
-			//
-			// } else if (source == bzapiszObrazek) {
-			// tryb = Tryb.ZAPIS;
-			//
-			// } else if (source == bwczytajObrazek) {
-			// tryb = Tryb.WCZYTYWANIE;
-			//
-			// } else if (source == bedycja) {
-			// tryb = Tryb.EDYCJA;
-			//
-			// }else if (source == bwczytajkontury) {
-			// tryb = Tryb.WCZYTYWANIEKONTURY;
-			//
-			// }
+		} else if (source == bobrazek) {
 
-	
+			if (model.wczytajObrazek(fnazwa.getText())) {
+				tryb = Tryb.OBRAZEK;
+				funkcja = Tryb.OFF;
+				widok.repaint();
+			}
+
+		} else if (source == bprosta) {
+
+			funkcja = Tryb.RYSUJPROSTA;
+		} else if (source == bobrot) {
+			
+				model.obrot(pobierz(macierzobrut));
+				widok.repaint();		
+				
+			
+		}
+
+		// } else if (source == bwektor) {
+		// tryb = Tryb.WIELOKONT;
+		//
+		// } else if (source == bzapiszObrazek) {
+		// tryb = Tryb.ZAPIS;
+		//
+		// } else if (source == bwczytajObrazek) {
+		// tryb = Tryb.WCZYTYWANIE;
+		//
+		// } else if (source == bedycja) {
+		// tryb = Tryb.EDYCJA;
+		//
+		// }else if (source == bwczytajkontury) {
+		// tryb = Tryb.WCZYTYWANIEKONTURY;
+		//
+		// }
 
 		// Force window redraw to see the result immediately
 		// Wymuszenie przerysowania okna aby uzyskaæ efekt operacji natychmiast
 		repaint();
 	}
-	
+
+	private double [] pobierz(JTextField[][] macierz) {
+		// TODO Auto-generated method stub
+		double [] mac = new double[9];
+		int l = 0;
+		for(int i=0; i<3; i++)
+		{
+			for(int j=0; j<3; j++)
+			{
+				mac[l] = Double.parseDouble(macierz[i][j].getText());
+				l++;	
+			}
+		}
+		return mac;
+	}
+
 	public double getA() {
 		// TODO Auto-generated method stub
 		return Double.parseDouble(fa.getText());
 	}
-	
+
 	public double getB() {
 		// TODO Auto-generated method stub
 		return Double.parseDouble(fb.getText());
 	}
-	
-	
-	public Tryb funkcja()
-	{
+
+	public Tryb funkcja() {
 		return funkcja;
 	}
-	
-	public Tryb tryb()
-	{
+
+	public Tryb tryb() {
 		return tryb;
 	}
-
-	
 
 	public String getfileName() {
 		// TODO Auto-generated method stub
@@ -244,20 +248,20 @@ public class Controler extends JComponent implements ActionListener {
 
 	public void setFunkcja(Tryb tryb) {
 		// TODO Auto-generated method stub
-		funkcja= tryb;
-		
+		funkcja = tryb;
+
 	}
 
 	public void setModel(Model model) {
 		// TODO Auto-generated method stub
-		this.model = model; 
-		
+		this.model = model;
+
 	}
 
 	public void setWidok(Widok widok) {
 		// TODO Auto-generated method stub
 		this.widok = widok;
-		
+
 	}
 
 }
