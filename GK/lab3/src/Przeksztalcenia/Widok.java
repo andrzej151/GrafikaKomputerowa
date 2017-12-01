@@ -10,6 +10,7 @@ import java.awt.Stroke;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 
 import javax.swing.JPanel;
@@ -21,13 +22,13 @@ public class Widok extends JPanel implements MouseListener, MouseMotionListener 
 	private Controler controler;
 	private Model model;
 
-	public Widok() {
+	public Widok(int Maxwith, int Maxheight) {
 		// TODO Auto-generated constructor stub
 		addMouseListener(this);
 		addMouseMotionListener(this);
 
-		Maxwith = 2000;
-		Maxheight = 2000;
+		this.Maxwith = Maxwith;
+		this.Maxheight = Maxheight;
 		rozdzielczosc = 50;
 		srodekx = Maxwith / 2;
 		srodeky = Maxheight / 2;
@@ -78,17 +79,18 @@ public class Widok extends JPanel implements MouseListener, MouseMotionListener 
 			g2d.setColor(Color.BLUE);
 			g2d.setStroke(new BasicStroke(2));
 			System.out.println("okok");
-			Wektor wektor;
+			Shape wektor;
+			 g2d.setTransform(model.gettransform());
 
 			while (model.nastepnywektor()) {
 				wektor = model.getWektor();
 				System.out.println(wektor);
-				g2d.drawLine(Maxwith / 2 + (int) wektor.xs, Maxheight / 2 - (int) wektor.ys,
-						Maxwith / 2 + (int) wektor.xk, Maxheight / 2 - (int) wektor.yk);
+				g2d.draw(wektor);
 			}
 
 			g2d.setColor(Color.BLACK);
 			g2d.setStroke(new BasicStroke(1));
+			g2d.setTransform( new AffineTransform() );
 
 		}
 	}
