@@ -54,19 +54,19 @@ public class Controler extends JComponent implements ActionListener {
 		bobrot.setBounds(600, 10, width + 50, height);
 		bobrot.addActionListener(this);
 		add(bobrot);
-		stworzmacierz(macierzobrut, 600, height + 20, 60, 40);
+		macierzobrut=stworzmacierz(macierzobrut, 600, height + 20, 60, 40);
 
 		bprzesuniecie = new JButton("Przesuniecie");
 		bprzesuniecie.setBounds(600, 210, width + 50, height);
 		bprzesuniecie.addActionListener(this);
 		add(bprzesuniecie);
-		stworzmacierz(macierzprzesuniecie, 600, 260, 60, 40);
+		macierzprzesuniecie=stworzmacierz(macierzprzesuniecie, 600, 260, 60, 40);
 
 		bskalowanie = new JButton("Skalowanie");
 		bskalowanie.setBounds(600, 420, width + 50, height);
 		bskalowanie.addActionListener(this);
 		add(bskalowanie);
-		stworzmacierz(macierzskalowanie, 600, 470, 60, 40);
+		macierzskalowanie=stworzmacierz(macierzskalowanie, 600, 470, 60, 40);
 
 		bzlorzony = new JButton("Zlorzone");
 		bzlorzony.setBounds(600, 630, width, height);
@@ -103,24 +103,31 @@ public class Controler extends JComponent implements ActionListener {
 
 		fnazwa = new JTextField();
 		fnazwa.setBounds(320, 10, 100, 40);
+		fnazwa.setText("dane.txt");
 		add(fnazwa);
 
 		tryb = Tryb.OFF;
 		funkcja = Tryb.OFF;
+		macierzobrut[0][0].setText("1.0");
+		macierzobrut[1][1].setText("1.0");
+		macierzobrut[2][2].setText("1.0");
+		macierzobrut[2][0].setText("2.0");
+		macierzobrut[2][1].setText("-4.0");
 
 	}
 
-	public void stworzmacierz(JTextField[][] macierz, int poczatekx, int poczateky, int w, int h) {
+	public JTextField[][] stworzmacierz(JTextField[][] macierz, int poczatekx, int poczateky, int w, int h) {
 
 		macierz = new JTextField[3][3];
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
-				macierz[i][j] = new JTextField();
-				macierz[i][j].setBounds(poczatekx + i * (w + 10), poczateky + j * (h + 10), w, h);
-				macierz[i][j].setText("0.0");
-				add(macierz[i][j]);
+				macierz[j][i] = new JTextField();
+				macierz[j][i].setBounds(poczatekx + i * (w + 10), poczateky + j * (h + 10), w, h);
+				macierz[j][i].setText("0.0");
+				add(macierz[j][i]);
 			}
 		}
+		return macierz;
 	}
 
 	public void paintComponent(Graphics g) {
@@ -177,9 +184,9 @@ public class Controler extends JComponent implements ActionListener {
 			
 				model.obrot(pobierz(macierzobrut));
 				widok.repaint();		
-				
-			
 		}
+		
+		
 
 		// } else if (source == bwektor) {
 		// tryb = Tryb.WIELOKONT;
@@ -203,16 +210,16 @@ public class Controler extends JComponent implements ActionListener {
 		repaint();
 	}
 
-	private double [] pobierz(JTextField[][] macierz) {
+	private double [][] pobierz(JTextField[][] macierz) {
 		// TODO Auto-generated method stub
-		double [] mac = new double[9];
-		int l = 0;
+		double [][] mac = new double[3][3];
+	
 		for(int i=0; i<3; i++)
 		{
 			for(int j=0; j<3; j++)
 			{
-				mac[l] = Double.parseDouble(macierz[i][j].getText());
-				l++;	
+				mac[j][i] = Double.parseDouble(macierz[j][i].getText());
+					
 			}
 		}
 		return mac;

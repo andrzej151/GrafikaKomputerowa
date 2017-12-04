@@ -64,7 +64,7 @@ public class Widok extends JPanel implements MouseListener, MouseMotionListener 
 	private void obrazek(Graphics2D g2d) {
 		// TODO Auto-generated method stub
 		if (model.isObrazek()) {
-			System.out.println("ok");
+			
 			g2d.drawImage(model.getImages(), Maxwith / 2 - model.getImageW() / 2, Maxheight / 2 - model.getImageH() / 2,
 					null);
 
@@ -77,12 +77,12 @@ public class Widok extends JPanel implements MouseListener, MouseMotionListener 
 		if (model.pierwszywektor()) {
 			g2d.setColor(Color.BLUE);
 			g2d.setStroke(new BasicStroke(2));
-			System.out.println("okok");
+			
 			Wektor wektor;
 
 			while (model.nastepnywektor()) {
 				wektor = model.getWektor();
-				System.out.println(wektor);
+			
 				g2d.drawLine(Maxwith / 2 + (int) wektor.xs, Maxheight / 2 - (int) wektor.ys,
 						Maxwith / 2 + (int) wektor.xk, Maxheight / 2 - (int) wektor.yk);
 			}

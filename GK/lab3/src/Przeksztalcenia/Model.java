@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.ref.PhantomReference;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -18,7 +19,7 @@ public class Model {
 	private ArrayList<Punkt> pkt;
 	private ArrayList<Polaczenia> polaczenia;
 	private int iteratorpolaczenia;
-	private BufferedImage images;
+	private Obraz obraz;
 	private boolean isimg;
 	private AffineTransform przeksztalcenie;
 
@@ -26,6 +27,7 @@ public class Model {
 		pkt = new ArrayList<>();
 		polaczenia = new ArrayList<>();
 		iteratorpolaczenia = 0;
+		obraz = new Obraz();
 	}
 
 	public boolean pierwszywektor() {
@@ -43,7 +45,7 @@ public class Model {
 		// TODO Auto-generated method stub
 		Wektor w = new Wektor();
 		Polaczenia po = polaczenia.get(iteratorpolaczenia);
-		System.out.println("spr " + po);
+		//System.out.println("spr " + po);
 		w.xs = po.getA().getX();
 		w.ys = po.getA().getY();
 		w.xk = po.getB().getX();
@@ -59,13 +61,13 @@ public class Model {
 		Polaczenia pol;
 
 		try {
-			System.out.println(nazwa);
+			//System.out.println(nazwa);
 			Scanner in = new Scanner(new File(nazwa));
 			iloscpunktow = in.nextInt();
 			iloscpolaczen = in.nextInt();
 			pkt = new ArrayList<>();
 			polaczenia = new ArrayList<>();
-			System.out.println("ok");
+			//System.out.println("ok");
 			while (in.hasNext() && (!pom.equals("Punkty"))) {
 				pom = in.next();
 			}
@@ -101,23 +103,14 @@ public class Model {
 
 	public boolean wczytajObrazek(String nazwa) {
 		// TODO Auto-generated method stub
-		try {
-			images = ImageIO.read(new File(nazwa));
-			
-			System.out.println("ok "+images.getHeight());
-			isimg = true;
-			return true;
-		} catch (IOException e) {
-			isimg = false;
-			System.out.println("blad");
-			return false;
-
-		}
+		isimg=obraz.wczytajObrazek(nazwa);
+		return isimg;
+	
 	}
 
 	public BufferedImage getImages() {
 		// TODO Auto-generated method stub
-		return images;
+		return obraz.getObraz();
 	}
 
 	public boolean isObrazek() {
@@ -127,18 +120,21 @@ public class Model {
 
 	public int getImageW() {
 		// TODO Auto-generated method stub
-		return images.getWidth();
+		return obraz.getWidth();
 	}
 
 	public int getImageH() {
 		// TODO Auto-generated method stub
-		return images.getHeight();
+		return obraz.getHeight();
 	}
 
-	public void obrot(double[] ds) {
+	public void obrot(double[][] ds) {
 		// TODO Auto-generated method stub
-		przeksztalcenie = new AffineTransform(ds);
-		//przeksztalcenie.
+		System.out.println("ugauga");
+		for(int i = 0; i<pkt.size(); i++)
+		{
+			pkt.get(i).mnorzenie(ds);
+		}
 	}
 
 }
