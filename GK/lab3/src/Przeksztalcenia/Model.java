@@ -2,12 +2,15 @@ package Przeksztalcenia;
 
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.Shape;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
@@ -16,16 +19,21 @@ import javax.swing.JTextField;
 public class Model {
 
 	private ArrayList<Punkt> pkt;
-	private ArrayList<Polaczenia> polaczenia;
+	private ArrayList<Shape> polaczenia;
 	private int iteratorpolaczenia;
 	private BufferedImage images;
 	private boolean isimg;
-	private AffineTransform przeksztalcenie;
+	private AffineTransform transform;
+	private int Maxwith, Maxheight;
 
-	public Model() {
+	public Model(int Maxwith, int Maxheight) {
 		pkt = new ArrayList<>();
 		polaczenia = new ArrayList<>();
 		iteratorpolaczenia = 0;
+		this.Maxwith = Maxwith;
+		this.Maxheight = Maxheight;
+		
+		transform = new AffineTransform(  );  
 	}
 
 	public boolean pierwszywektor() {
@@ -39,17 +47,12 @@ public class Model {
 		return iteratorpolaczenia < polaczenia.size();
 	}
 
-	public Wektor getWektor() {
+	public Shape getWektor() {
 		// TODO Auto-generated method stub
-		Wektor w = new Wektor();
-		Polaczenia po = polaczenia.get(iteratorpolaczenia);
-		System.out.println("spr " + po);
-		w.xs = po.getA().getX();
-		w.ys = po.getA().getY();
-		w.xk = po.getB().getX();
-		w.yk = po.getB().getY();
+
+		Shape po = polaczenia.get(iteratorpolaczenia);
 		iteratorpolaczenia++;
-		return w;
+		return po;
 	}
 
 	public boolean wczytajWektor(String nazwa) {
@@ -85,8 +88,8 @@ public class Model {
 				x = in.nextInt();
 				y = in.nextInt();
 
-				pol = new Polaczenia(pkt.get(x), pkt.get(y));
-				polaczenia.add(pol);
+				polaczenia.add(new Line2D.Double(Maxwith / 2 + pkt.get(x).getX(), Maxheight / 2 - pkt.get(x).getY(),
+						Maxwith / 2 + pkt.get(y).getX(), Maxheight / 2 - pkt.get(y).getY()));
 			}
 
 			in.close();
@@ -103,8 +106,6 @@ public class Model {
 		// TODO Auto-generated method stub
 		try {
 			images = ImageIO.read(new File(nazwa));
-			
-			System.out.println("ok "+images.getHeight());
 			isimg = true;
 			return true;
 		} catch (IOException e) {
@@ -137,8 +138,19 @@ public class Model {
 
 	public void obrot(double[] ds) {
 		// TODO Auto-generated method stub
-		przeksztalcenie = new AffineTransform(ds);
-		//przeksztalcenie.
+
+
+		
+			  transform.translate(  10, 0 );
+			//pom.add(przeksztalcenie.createTransformedShape(polaczenia.remove(0)));
+
+		
+
+	}
+
+	public AffineTransform gettransform() {
+		// TODO Auto-generated method stub
+		return transform;
 	}
 
 }

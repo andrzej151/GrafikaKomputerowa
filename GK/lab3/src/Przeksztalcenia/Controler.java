@@ -54,19 +54,19 @@ public class Controler extends JComponent implements ActionListener {
 		bobrot.setBounds(600, 10, width + 50, height);
 		bobrot.addActionListener(this);
 		add(bobrot);
-		stworzmacierz(macierzobrut, 600, height + 20, 60, 40);
+		macierzobrut = stworzmacierz(macierzobrut, 600, height + 20, 60, 40);
 
 		bprzesuniecie = new JButton("Przesuniecie");
 		bprzesuniecie.setBounds(600, 210, width + 50, height);
 		bprzesuniecie.addActionListener(this);
 		add(bprzesuniecie);
-		stworzmacierz(macierzprzesuniecie, 600, 260, 60, 40);
+		macierzprzesuniecie = stworzmacierz(macierzprzesuniecie, 600, 260, 60, 40);
 
 		bskalowanie = new JButton("Skalowanie");
 		bskalowanie.setBounds(600, 420, width + 50, height);
 		bskalowanie.addActionListener(this);
 		add(bskalowanie);
-		stworzmacierz(macierzskalowanie, 600, 470, 60, 40);
+		macierzskalowanie = stworzmacierz(macierzskalowanie, 600, 470, 60, 40);
 
 		bzlorzony = new JButton("Zlorzone");
 		bzlorzony.setBounds(600, 630, width, height);
@@ -103,14 +103,16 @@ public class Controler extends JComponent implements ActionListener {
 
 		fnazwa = new JTextField();
 		fnazwa.setBounds(320, 10, 100, 40);
+		fnazwa.setText("dane.txt");
 		add(fnazwa);
 
 		tryb = Tryb.OFF;
 		funkcja = Tryb.OFF;
+		
 
 	}
 
-	public void stworzmacierz(JTextField[][] macierz, int poczatekx, int poczateky, int w, int h) {
+	public JTextField[][] stworzmacierz(JTextField[][] macierz, int poczatekx, int poczateky, int w, int h) {
 
 		macierz = new JTextField[3][3];
 		for (int i = 0; i < 3; i++) {
@@ -121,6 +123,7 @@ public class Controler extends JComponent implements ActionListener {
 				add(macierz[i][j]);
 			}
 		}
+		return macierz;
 	}
 
 	public void paintComponent(Graphics g) {
@@ -206,12 +209,16 @@ public class Controler extends JComponent implements ActionListener {
 	private double [] pobierz(JTextField[][] macierz) {
 		// TODO Auto-generated method stub
 		double [] mac = new double[9];
+		String s;
 		int l = 0;
 		for(int i=0; i<3; i++)
 		{
 			for(int j=0; j<3; j++)
 			{
-				mac[l] = Double.parseDouble(macierz[i][j].getText());
+				s=macierz[i][j].getText();
+				System.out.println(s);
+				
+				mac[l] = Double.parseDouble(s);
 				l++;	
 			}
 		}

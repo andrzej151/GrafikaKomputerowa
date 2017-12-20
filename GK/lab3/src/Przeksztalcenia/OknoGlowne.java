@@ -25,9 +25,9 @@ public class OknoGlowne extends JFrame {
 	public OknoGlowne() {
 		super("Przeksztalcenia - lab 3 GK");
 
-		widok = new Widok();
+		widok = new Widok(2000, 2000);
 		menu = new Controler();
-		model = new Model();
+		model = new Model(2000, 2000);
 		widok.setBounds(50, 150, 250, 250);
 
 	
