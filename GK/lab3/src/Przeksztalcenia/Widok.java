@@ -87,6 +87,7 @@ public class Widok extends JPanel implements MouseListener, MouseMotionListener 
 				wektor = model.getWektor();
 				System.out.println(wektor);
 				g2d.draw(wektor);
+<<<<<<< HEAD
 =======
 			
 			Wektor wektor;
@@ -97,6 +98,8 @@ public class Widok extends JPanel implements MouseListener, MouseMotionListener 
 				g2d.drawLine(Maxwith / 2 + (int) wektor.xs, Maxheight / 2 - (int) wektor.ys,
 						Maxwith / 2 + (int) wektor.xk, Maxheight / 2 - (int) wektor.yk);
 >>>>>>> wektor
+=======
+>>>>>>> master
 			}
 
 			g2d.setColor(Color.BLACK);

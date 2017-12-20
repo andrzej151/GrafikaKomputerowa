@@ -32,13 +32,19 @@ public class Model {
 		polaczenia = new ArrayList<>();
 		iteratorpolaczenia = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
 		this.Maxwith = Maxwith;
 		this.Maxheight = Maxheight;
 		
 		transform = new AffineTransform(  );  
+<<<<<<< HEAD
 =======
 		obraz = new Obraz();
 >>>>>>> wektor
+=======
+>>>>>>> master
 	}
 
 	public boolean pierwszywektor() {
@@ -55,6 +61,7 @@ public class Model {
 	public Shape getWektor() {
 		// TODO Auto-generated method stub
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		Shape po = polaczenia.get(iteratorpolaczenia);
 =======
@@ -66,6 +73,10 @@ public class Model {
 		w.xk = po.getB().getX();
 		w.yk = po.getB().getY();
 >>>>>>> wektor
+=======
+
+		Shape po = polaczenia.get(iteratorpolaczenia);
+>>>>>>> master
 		iteratorpolaczenia++;
 		return po;
 	}
@@ -172,6 +183,7 @@ public class Model {
 
 	public AffineTransform gettransform() {
 		// TODO Auto-generated method stub
+<<<<<<< HEAD
 		return transform;
 =======
 		System.out.println("ugauga");
@@ -180,6 +192,21 @@ public class Model {
 			pkt.get(i).mnorzenie(ds);
 		}
 >>>>>>> wektor
+=======
+
+
+		
+			  transform.translate(  10, 0 );
+			//pom.add(przeksztalcenie.createTransformedShape(polaczenia.remove(0)));
+
+		
+
+	}
+
+	public AffineTransform gettransform() {
+		// TODO Auto-generated method stub
+		return transform;
+>>>>>>> master
 	}
 
 }

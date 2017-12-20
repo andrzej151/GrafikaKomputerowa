@@ -55,30 +55,42 @@ public class Controler extends JComponent implements ActionListener {
 		bobrot.addActionListener(this);
 		add(bobrot);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		macierzobrut = stworzmacierz(macierzobrut, 600, height + 20, 60, 40);
 =======
 		macierzobrut=stworzmacierz(macierzobrut, 600, height + 20, 60, 40);
 >>>>>>> wektor
+=======
+		macierzobrut = stworzmacierz(macierzobrut, 600, height + 20, 60, 40);
+>>>>>>> master
 
 		bprzesuniecie = new JButton("Przesuniecie");
 		bprzesuniecie.setBounds(600, 210, width + 50, height);
 		bprzesuniecie.addActionListener(this);
 		add(bprzesuniecie);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		macierzprzesuniecie = stworzmacierz(macierzprzesuniecie, 600, 260, 60, 40);
 =======
 		macierzprzesuniecie=stworzmacierz(macierzprzesuniecie, 600, 260, 60, 40);
 >>>>>>> wektor
+=======
+		macierzprzesuniecie = stworzmacierz(macierzprzesuniecie, 600, 260, 60, 40);
+>>>>>>> master
 
 		bskalowanie = new JButton("Skalowanie");
 		bskalowanie.setBounds(600, 420, width + 50, height);
 		bskalowanie.addActionListener(this);
 		add(bskalowanie);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		macierzskalowanie = stworzmacierz(macierzskalowanie, 600, 470, 60, 40);
 =======
 		macierzskalowanie=stworzmacierz(macierzskalowanie, 600, 470, 60, 40);
 >>>>>>> wektor
+=======
+		macierzskalowanie = stworzmacierz(macierzskalowanie, 600, 470, 60, 40);
+>>>>>>> master
 
 		bzlorzony = new JButton("Zlorzone");
 		bzlorzony.setBounds(600, 630, width, height);
@@ -121,6 +133,7 @@ public class Controler extends JComponent implements ActionListener {
 		tryb = Tryb.OFF;
 		funkcja = Tryb.OFF;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
 =======
 		macierzobrut[0][0].setText("1.0");
@@ -129,6 +142,9 @@ public class Controler extends JComponent implements ActionListener {
 		macierzobrut[2][0].setText("2.0");
 		macierzobrut[2][1].setText("-4.0");
 >>>>>>> wektor
+=======
+		
+>>>>>>> master
 
 	}
 
@@ -241,6 +257,9 @@ public class Controler extends JComponent implements ActionListener {
 			for(int j=0; j<3; j++)
 			{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> master
 				s=macierz[i][j].getText();
 				System.out.println(s);
 				
