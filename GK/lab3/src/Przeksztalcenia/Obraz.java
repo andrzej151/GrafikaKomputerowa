@@ -7,30 +7,29 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Obraz {
-	private BufferedImage images;
+	private BufferedImage imagesorginal, imagewyswietl;
 
 	public BufferedImage getObraz() {
 		// TODO Auto-generated method stub
-		return images;
+		return imagewyswietl;
 	}
 
 	public int getWidth() {
 		// TODO Auto-generated method stub
-		return images.getWidth();
+		return imagewyswietl.getWidth();
 	}
 
 	public int getHeight() {
 		// TODO Auto-generated method stub
-		return  images.getHeight();
+		return  imagewyswietl.getHeight();
 	}
 	
 	public boolean wczytajObrazek(String nazwa) {
 		// TODO Auto-generated method stub
 		try {
-			images = ImageIO.read(new File(nazwa));
-			
-			System.out.println("ok "+images.getHeight());
-			
+			imagesorginal = ImageIO.read(new File(nazwa));
+			imagewyswietl = ImageIO.read(new File(nazwa));
+		
 			return true;
 		} catch (IOException e) {
 			

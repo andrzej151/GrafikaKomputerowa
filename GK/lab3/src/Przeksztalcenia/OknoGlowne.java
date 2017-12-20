@@ -16,7 +16,6 @@ public class OknoGlowne extends JFrame {
 
 	private JScrollPane scrollPane;
 	private JPanel contentPane;
-	private JButton b;
 	private Controler menu;
 	private Model model;
 	
